@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDN Sound Designer</title>
+<meta name="description" content="SDN Sound Designer indépendant. Sound design, montage son, mixage et voice design pour cinéma, série, animation et motion design. Remote-ready.">
+<meta name="keywords" content="sound designer, sound designer, montage son, mixage, voice design, bruitage, foley, freelance, indépendant, cinéma, animation, série">
+<meta property="og:title" content="SDN Sound Designer">
+<meta property="og:description" content="Designing the unseen. Sound design, montage son et mixage au service de chaque projet.">
+<meta property="og:url" content="https://www.sdnprod.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SDN Sound Designer">
+<meta name="twitter:description" content="Designing the unseen. Sound design, montage son et mixage au service de chaque projet.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#D0191A;--red-hover:#a81315;--black:#0A0A0A;--off-black:#111111;--card:#161616;--border:#2a2a2a;--text:#E8E4DC;--muted:#7a7570}
+html{font-size:16px;scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;cursor:none}
+
+#back-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;background:var(--red);border:none;cursor:none;display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top::after{content:'';border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:10px solid #fff;display:block}
+#cursor{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s}
+#cursor-ring{position:fixed;width:30px;height:30px;border:1px solid rgba(255,255,255,0.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width 0.25s,height 0.25s,border-color 0.2s}
+body.cursor-hover #cursor{width:5px;height:5px}
+body.cursor-hover #cursor-ring{width:42px;height:42px;border-color:rgba(255,255,255,0.6)}
+a,button{cursor:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;border-bottom:0.5px solid transparent;transition:all 0.4s ease}
+nav.scrolled{background:rgba(10,10,10,0.95);border-bottom-color:var(--border)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.12em;background:linear-gradient(135deg,#D0191A 0%,#8B0000 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-right{display:flex;align-items:center;gap:2rem}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--red)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:none;padding:4px;width:28px;height:28px}
+.hamburger span{display:block;width:100%;height:1.5px;background:var(--muted);transition:all 0.25s ease}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--red)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--red)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.mobile-menu a:hover{color:var(--red)}
+.mobile-menu-lang{display:flex;gap:1rem;margin-top:1rem}
+.mobile-menu-lang button{background:none;border:0.5px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;padding:0.5rem 1rem;cursor:none;text-transform:uppercase}
+.mobile-menu-lang button.active{background:var(--red);color:#fff;border-color:var(--red)}
+.lang-switch{display:flex;align-items:center;border:0.5px solid var(--border);overflow:hidden}
+.lang-btn{background:none;border:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;padding:0.4rem 0.75rem;cursor:none;transition:all 0.2s;text-transform:uppercase}
+.lang-btn.active{background:var(--red);color:#fff}
+.lang-btn:not(.active):hover{color:var(--text)}
+#ambient-btn{background:none;border:0.5px solid var(--border);color:var(--muted);font-size:0.75rem;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all 0.2s;padding:0;position:relative}
+#ambient-btn:hover{border-color:var(--red);color:var(--text)}
+#ambient-btn.active{border-color:var(--red);color:var(--red)}
+#ambient-btn.active #ambient-icon{animation:pulse-icon 1.8s ease-in-out infinite}
+#mute-btn{background:none;border:0.5px solid var(--border);color:var(--muted);font-size:0.7rem;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:none;transition:all 0.2s;padding:0}
+#mute-btn:hover{border-color:var(--red);color:var(--text)}
+#mute-btn.muted{border-color:var(--red);color:var(--red);background:rgba(208,25,26,0.08)}
+@keyframes pulse-icon{0%,100%{opacity:1}50%{opacity:0.4}}
+
+.hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding:0 2.5rem;position:relative;overflow:hidden}
+.hero-content{display:flex;flex-direction:column;justify-content:center;padding-top:6rem;position:relative;z-index:2}
+.hero-tag{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase;margin-bottom:2rem}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,10vw,9.5rem);line-height:0.9;letter-spacing:0.02em;margin-bottom:2.5rem}
+.hero h1 em{color:var(--red);font-style:normal}
+.hero-sub{max-width:480px;color:var(--muted);font-size:0.95rem;line-height:1.8;margin-bottom:3rem}
+.hero-cta{display:flex;gap:1.25rem;align-items:center}
+.btn-primary{background:var(--red);color:#fff;padding:0.9rem 2.25rem;font-family:'DM Sans',sans-serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:background 0.2s}
+.btn-primary:hover{background:var(--red-hover)}
+.btn-ghost{color:var(--muted);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s}
+.btn-ghost:hover{color:var(--text)}
+.btn-ghost::after{content:'→'}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:2.5rem;position:relative;z-index:2}
+.hero-scroll-arrow{width:24px;height:24px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);cursor:none;animation:bounce-arrow 1.6s ease-in-out infinite;margin-bottom:0.5rem}
+@keyframes bounce-arrow{0%,100%{transform:rotate(45deg) translateY(0);opacity:0.4}50%{transform:rotate(45deg) translateY(6px);opacity:1}}
+.hero-stats{display:flex;gap:3rem}
+.hero-stat strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text);line-height:1}
+.hero-stat span{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:1;pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:0.18;pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.3) 50%,transparent 100%);mask-image:linear-gradient(to bottom,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.3) 50%,transparent 100%);z-index:0}
+
+.marquee-wrap{overflow:hidden;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:0.75rem 0;background:var(--off-black)}
+.marquee-inner{display:flex;gap:3rem;animation:marquee 22s linear infinite;width:max-content}
+.marquee-item{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.15em;color:var(--muted);white-space:nowrap}
+.marquee-item span{color:var(--red);margin-right:3rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+section{padding:6rem 2.5rem}
+.section-label{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:0.03em;margin-bottom:2.5rem}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.about-visual{position:relative;padding-top:1.5rem}
+.about-img-frame{width:100%;aspect-ratio:3/4;background:var(--card);border:0.5px solid var(--border);position:relative;overflow:hidden}
+.about-img-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+.waveform{display:flex;align-items:center;justify-content:center;gap:3px;height:80px}
+.waveform-bar{width:3px;background:var(--red);border-radius:2px;animation:wave 1.2s ease-in-out infinite}
+.waveform-bar:nth-child(2){animation-delay:.1s;height:40%}.waveform-bar:nth-child(3){animation-delay:.2s;height:80%}.waveform-bar:nth-child(4){animation-delay:.3s;height:60%}.waveform-bar:nth-child(5){animation-delay:.4s;height:100%}.waveform-bar:nth-child(6){animation-delay:.5s;height:70%}.waveform-bar:nth-child(7){animation-delay:.6s;height:45%}.waveform-bar:nth-child(8){animation-delay:.7s;height:85%}.waveform-bar:nth-child(9){animation-delay:.8s;height:55%}.waveform-bar:nth-child(10){animation-delay:.9s;height:30%}
+@keyframes wave{0%,100%{transform:scaleY(0.4)}50%{transform:scaleY(1)}}
+.about-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--red);padding:1.5rem;text-align:center}
+.about-badge strong{display:block;font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1;color:#fff}
+.about-badge small{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:rgba(255,255,255,0.7);text-transform:uppercase}
+.about-text{padding-top:0.5rem}
+.about-text p{color:var(--muted);font-size:0.95rem;line-height:1.9;margin-bottom:1.25rem}
+.about-text p strong{color:var(--text);font-weight:400}
+.timeline{margin-top:2.5rem;border-top:0.5px solid var(--border);padding-top:2rem;position:relative;padding-left:1.5rem}
+.timeline::before{content:'';position:absolute;left:0;top:2rem;bottom:0;width:0.5px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:1.75rem}
+.timeline-item::before{content:'';position:absolute;left:-1.5rem;top:0.45rem;width:5px;height:5px;background:var(--red);border-radius:50%;transform:translateX(-2px)}
+.timeline-year{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase;margin-bottom:0.25rem}
+.timeline-desc{font-size:0.85rem;color:var(--muted);line-height:1.6}
+.timeline-desc strong{color:var(--text);font-weight:400}
+.about-specs{margin-top:2rem;border-top:0.5px solid var(--border);padding-top:1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 2rem}
+.spec-item{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;padding:0.4rem 0;border-bottom:0.5px solid var(--border)}
+.spec-item strong{display:block;color:var(--text);font-weight:400;margin-bottom:0.15rem}
+
+.services-section{background:var(--off-black)}
+.services-intro{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:0.05em;color:var(--red);opacity:0.7;margin-bottom:2.5rem;line-height:1}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:0.5px solid var(--border)}
+.service-card{padding:2rem 1.75rem;border-right:0.5px solid var(--border);border-bottom:0.5px solid var(--border);transition:background 0.25s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transition:transform 0.3s;transform-origin:bottom}
+.service-card:hover{background:rgba(208,25,26,0.04)}
+.service-card:hover::before{transform:scaleY(1)}
+.service-num{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:0.15em;margin-bottom:1rem}
+.service-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;margin-bottom:0.75rem;color:var(--text)}
+.service-card p{font-size:0.82rem;color:var(--muted);line-height:1.75}
+
+/* WORKS */
+.works-section{padding:6rem 2.5rem}
+.cat-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:1rem}
+.cat-label::after{content:'';flex:1;height:0.5px;background:var(--border)}
+.cat-label span{color:var(--red)}
+
+.demo-reel-wrap{margin-bottom:4.5rem}
+.demo-reel-card{width:100%;border:0.5px solid var(--border);overflow:hidden;background:var(--card);cursor:none;position:relative;transition:border-color 0.25s}
+.demo-reel-card:hover{border-color:var(--red)}
+.demo-reel-thumb{aspect-ratio:16/9;background:var(--off-black);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.play-icon-lg{width:70px;height:70px;border:1.5px solid var(--muted);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.25s;position:relative;z-index:2}
+.play-icon-lg::after{content:'';border-left:20px solid var(--muted);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px;transition:border-left-color 0.25s}
+.demo-reel-card:hover .play-icon-lg{border-color:var(--red)}
+.demo-reel-card:hover .play-icon-lg::after{border-left-color:var(--red)}
+.demo-reel-info{padding:1.25rem 2rem;border-top:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.demo-reel-info h4{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em}
+.demo-tag{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;background:rgba(208,25,26,0.1);padding:0.3rem 0.7rem}
+
+.work-hover-overlay{position:absolute;inset:0;background:rgba(10,10,10,0.78);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;opacity:0;transition:opacity 0.3s ease;z-index:1;pointer-events:none}
+.demo-reel-card:hover .work-hover-overlay,.work-card:hover .work-hover-overlay{opacity:1}
+.work-hover-desc{font-size:0.8rem;color:rgba(232,228,220,0.85);line-height:1.6;max-width:560px}
+.work-hover-tag{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;color:var(--red);text-transform:uppercase;margin-bottom:0.4rem}
+
+.works-cat-wrap{margin-bottom:4.5rem}
+.works-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.work-card{background:var(--card);overflow:hidden;cursor:none;position:relative;transition:background 0.2s}
+.work-card:hover{background:#1b1b1b}
+.work-thumb{aspect-ratio:16/9;background:var(--off-black);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.play-icon{width:40px;height:40px;border:1.5px solid var(--muted);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s;position:relative;z-index:2}
+.play-icon::after{content:'';border-left:13px solid var(--muted);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px;transition:border-left-color 0.2s}
+.work-card:hover .play-icon{border-color:var(--red)}
+.work-card:hover .play-icon::after{border-left-color:var(--red)}
+.work-info{padding:0.9rem 1.1rem;border-top:0.5px solid var(--border)}
+.work-info h4{font-family:'Bebas Neue',sans-serif;font-size:0.95rem;letter-spacing:0.08em;margin-bottom:0.25rem;color:var(--text)}
+.work-meta{display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap}
+.work-type{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;color:var(--red);text-transform:uppercase;background:rgba(208,25,26,0.1);padding:0.2rem 0.5rem}
+.work-client{font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--muted);letter-spacing:0.1em}
+
+.work-slot-empty .work-thumb{opacity:1;background:var(--off-black)}
+.work-slot-empty-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.6rem;position:relative;overflow:hidden}
+.work-slot-empty-inner::before{content:'';position:absolute;inset:0;border:0.5px dashed rgba(208,25,26,0.2)}
+.work-slot-empty-inner::after{content:'';position:absolute;top:50%;left:0;right:0;height:0.5px;background:linear-gradient(90deg,transparent,rgba(208,25,26,0.15),transparent)}
+.slot-plus{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;color:var(--red);text-transform:uppercase;opacity:0.6}
+.slot-label{font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.15em;color:var(--muted);opacity:0.4}
+.work-slot-empty .work-info h4{color:var(--muted);font-size:0.7rem;font-family:'DM Mono',monospace;font-weight:300;letter-spacing:0.12em;opacity:0.5}
+
+.process-section{background:var(--black);border-top:0.5px solid var(--border)}
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:0.5px solid var(--border);margin-top:0.5rem}
+.process-step{padding:2.5rem 2rem;border-right:0.5px solid var(--border);position:relative}
+.process-step:last-child{border-right:none}
+.process-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:1;color:var(--border);position:absolute;top:1.25rem;right:1.5rem;user-select:none}
+.process-icon{width:36px;height:2px;background:var(--red);margin-bottom:1.5rem}
+.process-step h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.06em;margin-bottom:0.75rem;color:var(--text)}
+.process-step p{font-size:0.82rem;color:var(--muted);line-height:1.8}
+
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.contact-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);line-height:0.95;margin-bottom:1.5rem}
+.contact-left h2 em{color:var(--red);font-style:normal;display:block}
+.contact-left p{color:var(--muted);font-size:0.9rem;line-height:1.8;margin-bottom:2rem}
+.contact-links{display:flex;flex-direction:column;gap:0.75rem}
+.contact-link{display:flex;align-items:center;gap:0.75rem;color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s;font-family:'DM Mono',monospace;letter-spacing:0.05em}
+.contact-link:hover{color:var(--text)}
+.contact-link-dot{width:6px;height:6px;background:var(--red);flex-shrink:0}
+.contact-form{display:flex;flex-direction:column;gap:1.25rem}
+.form-field{display:flex;flex-direction:column;gap:0.5rem}
+.form-field label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase}
+.form-field input,.form-field textarea,.form-field select{background:var(--card);border:0.5px solid var(--border);color:var(--text);padding:0.85rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:300;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--red)}
+.form-field textarea{resize:vertical;min-height:120px}
+.form-submit{background:var(--red);color:#fff;border:none;padding:1rem 2rem;font-family:'DM Sans',sans-serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;cursor:none;transition:background 0.2s;align-self:flex-start;margin-top:0.5rem}
+.form-submit:hover{background:var(--red-hover)}
+
+footer{border-top:0.5px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center}
+@keyframes zzz-float{0%,100%{transform:translateY(0) scale(1);opacity:0.5}50%{transform:translateY(-6px) scale(1.15);opacity:1}}
+#cat-bubble{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);background:var(--off-black);border:0.5px solid var(--border);padding:0.3rem 0.75rem;font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:0.1em;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.15s}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.15em;color:var(--muted)}
+.footer-copy{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.1em}
+
+@media(max-width:768px){
+  #cursor,#cursor-ring{display:none}
+  body,a,button{cursor:auto}
+  nav{padding:1rem 1.25rem}
+  .nav-links{display:none}
+  .lang-switch{display:none}
+  #mute-btn{display:none}
+  .hamburger{display:flex}
+  .hero,.works-section{padding:0 1.25rem}
+  .hero{padding-bottom:0}
+  .hero h1{font-size:clamp(3.5rem,14vw,6rem)}
+  section{padding:4rem 1.25rem}
+  .works-section{padding:4rem 1.25rem}
+  .about{grid-template-columns:1fr;gap:3rem}
+  .about-badge{bottom:-1rem;right:0}
+  .services-grid{grid-template-columns:1fr}
+  .works-grid-3{grid-template-columns:1fr 1fr}
+  .contact-inner{grid-template-columns:1fr;gap:3rem}
+  .process-grid{grid-template-columns:1fr}
+  .process-step{border-right:none;border-bottom:0.5px solid var(--border)}
+  .hero-stats{gap:1.5rem}
+  .demo-reel-thumb{aspect-ratio:16/9}
+}
+@media(max-width:480px){
+  .works-grid-3{grid-template-columns:1fr}
+  .about-specs{grid-template-columns:1fr}
+  .hero-stats{gap:1rem}
+  .hero-stat span{font-size:0.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut"></button>
+
+<nav id="nav">
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:none" title="Retour en haut">SDN</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#works" data-fr="Travaux" data-en="Works">Travaux</a></li>
+      <li><a href="#about" data-fr="À propos" data-en="About">À propos</a></li>
+      <li><a href="#services" data-fr="Services" data-en="Services">Services</a></li>
+      <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button id="mute-btn" onclick="toggleMute()" title="Couper tous les sons">
+      <svg id="icon-sound" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+      <svg id="icon-muted" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#works" onclick="closeMobileMenu()" data-fr="Travaux" data-en="Works">Travaux</a>
+  <a href="#about" onclick="closeMobileMenu()" data-fr="À propos" data-en="About">À propos</a>
+  <a href="#services" onclick="closeMobileMenu()" data-fr="Services" data-en="Services">Services</a>
+  <a href="#contact" onclick="closeMobileMenu()" data-fr="Contact" data-en="Contact">Contact</a>
+  <div class="mobile-menu-lang">
+    <button class="active" id="mob-btn-fr" onclick="setLang('fr');updateMobileLang('fr')">FR</button>
+    <button id="mob-btn-en" onclick="setLang('en');updateMobileLang('en')">EN</button>
+  </div>
+</div>
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-fr="Sound Designer · Monteur Son · Mixer · Indépendant" data-en="Sound Designer · Sound Editor · Mixer · Freelance">Sound Designer · Monteur Son · Mixer · Indépendant</div>
+    <h1 data-fr="Bienvenue" data-en="Welcome">Bienvenue</h1>
+    <p class="hero-sub" data-fr="Si ça sonne bien, ce n'est pas un hasard. De la conception sonore au mixage final, je construis des univers sonores au service de chaque projet. Cinéma, série, animation, motion design." data-en="If it sounds good, it's not by accident. From sound design to final mix, I build audio worlds at the service of every project. Film, series, animation, motion design.">Si ça sonne bien, ce n'est pas un hasard. De la conception sonore au mixage final, je construis des univers sonores au service de chaque projet. Cinéma, série, animation, motion design.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary" data-fr="Travailler ensemble" data-en="Work together">Travailler ensemble</a>
+      <a href="#works" class="btn-ghost" data-fr="Voir mes projets" data-en="See my work">Voir mes projets</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>5+</strong><span data-fr="Ans d'expérience" data-en="Years experience">Ans d'expérience</span></div>
+      <div class="hero-stat"><strong>30+</strong><span data-fr="Projets livrés" data-en="Projects delivered">Projets livrés</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>Remote-ready</span></div>
+    </div>
+    <div class="hero-scroll-arrow" onclick="document.querySelector('.marquee-wrap').scrollIntoView({behavior:'smooth'})"></div>
+  </div>
+</section>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Sound Design <span>✦</span></span>
+    <span class="marquee-item">Montage Son <span>✦</span></span>
+    <span class="marquee-item">Mixage <span>✦</span></span>
+    <span class="marquee-item">Voice Design <span>✦</span></span>
+    <span class="marquee-item">Foley <span>✦</span></span>
+    <span class="marquee-item">Audio Post-Production <span>✦</span></span>
+    <span class="marquee-item">Field Recording <span>✦</span></span>
+    <span class="marquee-item">Dialogue Editing <span>✦</span></span>
+    <span class="marquee-item">Sound Design <span>✦</span></span>
+    <span class="marquee-item">Montage Son <span>✦</span></span>
+    <span class="marquee-item">Mixage <span>✦</span></span>
+    <span class="marquee-item">Voice Design <span>✦</span></span>
+    <span class="marquee-item">Foley <span>✦</span></span>
+    <span class="marquee-item">Audio Post-Production <span>✦</span></span>
+    <span class="marquee-item">Field Recording <span>✦</span></span>
+    <span class="marquee-item">Dialogue Editing <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-visual">
+      <div class="about-img-frame">
+        <div class="about-img-placeholder">
+          <div class="waveform">
+            <div class="waveform-bar" style="height:35%"></div>
+            <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
+            <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
+            <div class="waveform-bar"></div><div class="waveform-bar"></div><div class="waveform-bar"></div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.15em" data-fr="[ VOTRE PHOTO ICI ]" data-en="[ YOUR PHOTO HERE ]">[ VOTRE PHOTO ICI ]</span>
+        </div>
+      </div>
+      <div class="about-badge"><strong>5+</strong><small data-fr="ans d'expérience" data-en="years experience">ans d'expérience</small></div>
+    </div>
+    <div class="about-text">
+      <div class="section-label" data-fr="À propos" data-en="About">À propos</div>
+      <div class="section-title"><em style="font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--red);font-style:normal;font-size:1.3em;letter-spacing:0.05em">SDN</em>,<br>Sound Designer</div>
+      <p data-fr="Diplômé en ingénierie du son, montage et sound design, je travaille depuis plusieurs années sur des projets qui vont de la <strong>série animée</strong> au <strong>long métrage</strong>, en passant par la publicité et le motion design." data-en="With a degree in sound engineering, editing, and design, I've spent several years working on projects ranging from <strong>animated series</strong> to <strong>feature films</strong>, including advertising and motion design.">Diplômé en ingénierie du son, montage et sound design, je travaille depuis plusieurs années sur des projets qui vont de la <strong>série animée</strong> au <strong>long métrage</strong>, en passant par la publicité et le motion design.</p>
+      <p data-fr="Mon studio est entièrement pensé pour le <strong>travail à distance</strong>. Workflow fluide, échanges clairs, livraisons dans les délais. J'accompagne chaque projet du premier échange jusqu'au master final." data-en="My studio is fully set up for <strong>remote work</strong>. Smooth workflow, clear communication, on-time delivery. I support every project from the first exchange to the final master.">Mon studio est entièrement pensé pour le <strong>travail à distance</strong>. Workflow fluide, échanges clairs, livraisons dans les délais. J'accompagne chaque projet du premier échange jusqu'au master final.</p>
+      <p data-fr="SDN est le pseudonyme sous lequel je travaille, à la fois acronyme de Sound DesigN et clin d'œil à mon prénom Nathan." data-en="SDN is the alias I work under, both an acronym for Sound DesigN and a nod to my name, Nathan.">SDN est le pseudonyme sous lequel je travaille, à la fois acronyme de Sound DesigN et clin d'œil à mon prénom Nathan.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2020</div>
+          <div class="timeline-desc"><strong>Brevet de technicien son audiovisuel</strong></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-desc"><strong>Premiers projets professionnels</strong></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-desc"><strong>Diplôme en montage son linéaire et sound design.</strong> Collaboration avec ArtFX, contrat avec Piste Rouge</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-desc"><strong>Studio personnel opérationnel.</strong> Workflow remote complet, multicanal et broadcast-ready</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-desc"><strong>Collaboration avec Epic Mountain</strong> et des projets indépendants</div>
+        </div>
+      </div>
+
+      <div class="about-specs">
+        <div class="spec-item"><strong>Pro Tools / Reaper / Ableton</strong>DAW</div>
+        <div class="spec-item"><strong>Adam Audio 3.1 LCR + Sub</strong>Monitoring</div>
+        <div class="spec-item"><strong>AKG C414 / Shure SM7B / RØDE NTG5</strong>Micros</div>
+        <div class="spec-item"><strong>Scarlett 18i20 3rd Gen</strong>Interface</div>
+        <div class="spec-item"><strong>FabFilter / iZotope RX / NUGEN...</strong>Plugins</div>
+        <div class="spec-item"><strong>Tascam Portacapture X8</strong>Terrain</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="section-label" data-fr="Services" data-en="Services">Services</div>
+  <div class="section-title" data-fr="Mes prestations" data-en="What I do">Mes prestations</div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-num">01</div><h3 data-fr="Sound Design" data-en="Sound Design">Sound Design</h3><p data-fr="Je crée des sons qui renforcent le rythme, l'impact et la narration, des textures subtiles aux univers sonores complets. Chaque élément est conçu pour soutenir l'image, pas pour la distraire." data-en="I create sound that enhances rhythm, impact, and storytelling from subtle textures to fully built sonic worlds. Every element is designed to support the image, not distract from it.">Je crée des sons qui renforcent le rythme, l'impact et la narration, des textures subtiles aux univers sonores complets. Chaque élément est conçu pour soutenir l'image, pas pour la distraire.</p></div>
+    <div class="service-card"><div class="service-num">02</div><h3 data-fr="Montage Son" data-en="Sound Editing">Montage Son</h3><p data-fr="Je construis la couche invisible de votre histoire. Sélection, façonnage et placement de chaque son pour apporter clarté, rythme et émotion à vos projets." data-en="I craft the invisible layer of your story selecting, shaping, and timing every sound to bring clarity, rhythm, and emotion to your projects.">Je construis la couche invisible de votre histoire. Sélection, façonnage et placement de chaque son pour apporter clarté, rythme et émotion à vos projets.</p></div>
+    <div class="service-card"><div class="service-num">03</div><h3>Mixage</h3><p data-fr="Mixage stéréo et multicanal pour broadcast, cinéma ou web. Balance, dynamique et cohérence de A à Z." data-en="Stereo and multichannel mixing for broadcast, film or web. Balance, dynamics and consistency from start to finish.">Mixage stéréo et multicanal pour broadcast, cinéma ou web. Balance, dynamique et cohérence de A à Z.</p></div>
+    <div class="service-card"><div class="service-num">04</div><h3 data-fr="Dialogue Editing &amp; Voice Design" data-en="Dialogue Editing &amp; Voice Design">Dialogue Editing &amp; Voice Design</h3><p data-fr="Du montage dialogue propre au voice design expressif, je crée des voix naturelles, intelligibles et alignées émotionnellement avec l'histoire." data-en="From clean dialogue editing to expressive voice design, I craft voices that feel natural, intelligible, and emotionally aligned with the story.">Du montage dialogue propre au voice design expressif, je crée des voix naturelles, intelligibles et alignées émotionnellement avec l'histoire.</p></div>
+    <div class="service-card"><div class="service-num">05</div><h3 data-fr="Bruitage &amp; Field Recording" data-en="Foley &amp; Field Recording">Bruitage &amp; Field Recording</h3><p data-fr="J'enregistre et conçois des sons organiques pour apporter réalisme, texture et profondeur, créant des éléments audio uniques qui ne peuvent pas venir d'une bibliothèque." data-en="I record and design organic sounds to bring realism, texture, and depth, creating unique audio that can't be pulled from a library.">J'enregistre et conçois des sons organiques pour apporter réalisme, texture et profondeur, créant des éléments audio uniques qui ne peuvent pas venir d'une bibliothèque.</p></div>
+    <div class="service-card"><div class="service-num">06</div><h3>Audio Branding</h3><p data-fr="Identité sonore de marque, jingles et sound design publicitaire. Le son comme signature reconnaissable." data-en="Brand sonic identity, jingles and advertising sound design. Sound as a recognizable signature.">Identité sonore de marque, jingles et sound design publicitaire. Le son comme signature reconnaissable.</p></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="section-label" data-fr="Process" data-en="Process">Process</div>
+  <div class="section-title" data-fr="Comment je travaille" data-en="How I work">Comment je travaille</div>
+  <div class="process-grid">
+    <div class="process-step"><div class="process-num">01</div><div class="process-icon"></div><h3 data-fr="Brief &amp; Écoute" data-en="Brief &amp; Listen">Brief &amp; Écoute</h3><p data-fr="On commence par un échange pour comprendre votre projet, vos références et vos contraintes. Je lis l'image, je propose une direction sonore. Pas de devis à l'aveugle." data-en="We start with a conversation to understand your project, references and constraints. I read the picture, propose a sonic direction. No blind quotes.">On commence par un échange pour comprendre votre projet, vos références et vos contraintes. Je lis l'image, je propose une direction sonore. Pas de devis à l'aveugle.</p></div>
+    <div class="process-step"><div class="process-num">02</div><div class="process-icon"></div><h3 data-fr="Production" data-en="Production">Production</h3><p data-fr="Je travaille depuis mon studio. Livraisons régulières, retours intégrés rapidement. Vous avez une visibilité complète sur l'avancement sans avoir à relancer." data-en="I work from my studio. Regular deliveries, feedback integrated quickly. You have full visibility on progress without having to chase.">Je travaille depuis mon studio. Livraisons régulières, retours intégrés rapidement. Vous avez une visibilité complète sur l'avancement sans avoir à relancer.</p></div>
+    <div class="process-step"><div class="process-num">03</div><div class="process-icon"></div><h3 data-fr="Livraison" data-en="Delivery">Livraison</h3><p data-fr="Fichiers dans les formats que vous utilisez, masterisés aux normes broadcast ou web. Un projet livré proprement, dans les délais, prêt à diffuser." data-en="Files in the formats you use, mastered to broadcast or web specs. A project delivered cleanly, on time, ready to publish.">Fichiers dans les formats que vous utilisez, masterisés aux normes broadcast ou web. Un projet livré proprement, dans les délais, prêt à diffuser.</p></div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="works-section" id="works">
+  <div class="section-label" data-fr="Travaux" data-en="Works">Travaux</div>
+  <div class="section-title" data-fr="Ce que j'ai fait" data-en="What I've done">Ce que j'ai fait</div>
+
+  <!-- DEMO REEL -->
+  <div class="demo-reel-wrap">
+    <div class="cat-label"><span data-fr="Demo Reel" data-en="Demo Reel">Demo Reel</span></div>
+    <div class="demo-reel-card">
+      <div class="demo-reel-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Cs5U4noLgGo" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/Cs5U4noLgGo/maxresdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon-lg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+      <div class="demo-reel-info">
+        <h4>SDN SHOWREEL</h4>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMANDES & COLLABORATIONS 9 vidéos + 6 slots -->
+  <div class="works-cat-wrap">
+    <div class="cat-label"><span data-fr="Commandes &amp; Collaborations" data-en="Commissions &amp; Collaborations">Commandes &amp; Collaborations</span></div>
+    <div class="works-grid-3">
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/DMNlzf8PiEM" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/DMNlzf8PiEM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>THE AMAZING DIGITAL CIRCUS - Ep 8 : hjsakldfhl</h4><div class="work-meta"><span class="work-type">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Mo1A45ShcMo" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/Mo1A45ShcMo/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>You're More Stressed Than Ever - Let's Change That</h4><div class="work-meta"><span class="work-type">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/_zfN9wnPvU0" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/_zfN9wnPvU0/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>AI Slop Is Destroying The Internet</h4><div class="work-meta"><span class="work-type">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/gtDKKJq9u30" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/gtDKKJq9u30/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>The Dumbest Animal Alive</h4><div class="work-meta"><span class="work-type">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/u4LUix-BU0s" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/u4LUix-BU0s/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>The Drug To Master Reality</h4><div class="work-meta"><span class="work-type">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/LD1Rxd7RI34" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/LD1Rxd7RI34/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>CGI Animated Short Film: "THE CURSED BOUNTY"</h4><div class="work-meta"><span class="work-type">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/jekwdsDmEbI" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/jekwdsDmEbI/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>2023 GRADUATION FILM // EXODE // ARTFX OFFICIAL</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/-EK7fd3Y-98" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/-EK7fd3Y-98/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>2023 GRADUATION FILM // KAIJU KID // ARTFX OFFICIAL</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/N-hO79ecWd8" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/N-hO79ecWd8/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>2023 GRADUATION FILM // LE CHANT DE ROME // ARTFX OFFICIAL</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+
+    </div>
+  </div>
+
+  <!-- SÉRIES -->
+  <div class="works-cat-wrap">
+    <div class="cat-label"><span data-fr="Séries · Épisodes" data-en="Series · Episodes">Séries · Épisodes</span></div>
+    <div class="works-grid-3">
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/-JgLoItHofA" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/-JgLoItHofA/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>Monster Shaker</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/krk-F7RybLM" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/krk-F7RybLM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>SamSam</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/_Lk1UNamaCc" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/_Lk1UNamaCc/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>T'choupi</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/UhFMnS_0jWo" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/UhFMnS_0jWo/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>Il était une fois... Ces drôles d'objets</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/osjnYjgNg_E" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/osjnYjgNg_E/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>Oum le dauphin blanc</h4><div class="work-meta"><span class="work-type">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Projet à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+
+    </div>
+  </div>
+
+  <!-- RE-SOUNDS 17 vidéos + slots -->
+  <div class="works-cat-wrap">
+    <div class="cat-label"><span data-fr="Re-Sounds · Projets créatifs" data-en="Re-Sounds · Creative projects">Re-Sounds · Projets créatifs</span></div>
+    <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);letter-spacing:0.06em;line-height:1.8;margin-bottom:2rem;max-width:640px;border-left:2px solid var(--red);padding-left:1rem" data-fr="Exercices créatifs personnels. Je remplace intégralement la bande son d'une scène existante, de zéro : sound design, montage, mixage. Aucun son original conservé." data-en="Personal creative exercises. I replace the entire soundtrack of an existing scene from scratch: sound design, editing, mixing. No original sound kept.">Exercices créatifs personnels. Je remplace intégralement la bande son d'une scène existante, de zéro : sound design, montage, mixage. Aucun son original conservé.</p>
+    <div class="works-grid-3">
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/A6ex8pxxx-M" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/A6ex8pxxx-M/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Fog Hill of Five Elements - Xuan vs Wrath | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/m7QCPLWoCnU" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/m7QCPLWoCnU/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : Azuki Elementals ✦ | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Ch8_0jbq-pM" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/Ch8_0jbq-pM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Warhammer 40k : Space Marine II Trailer | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/TWV4JJz8al4" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/TWV4JJz8al4/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Dear Alice - Solar Punk | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/RhWfN_HdUKk" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/RhWfN_HdUKk/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : Elden Ring Cutscene - Margit, the Fell Omen | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/pO4Vtjf47QY" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/pO4Vtjf47QY/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[MAKING OF] : Elden Ring Cutscene - Margit, the Fell Omen | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/SYRfZyFg74g" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/SYRfZyFg74g/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Combat Pratice | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/CrwQrwWGbvE" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/CrwQrwWGbvE/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Fiddlesticks : Terror in Demacia | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/jNNPCLM9TIU" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/jNNPCLM9TIU/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : ARCANE - Vi vs. Sevika (Bar Fight) | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/4xWi8JOU0H8" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/4xWi8JOU0H8/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] ARCANE - Vi & Jayce VS Chemtanks | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://player.vimeo.com/video/833579262" style="padding:0;position:relative;cursor:none" onclick="lazyLoadVimeo(this)">
+          <img src="https://vumbnail.com/833579262.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+          <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+        </div>
+        <div class="work-info"><h4>[RE-SOUND] DEMON SLAYER - Hinokami Kagura: Sun Halo Dragon Head Dance | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/TcXx_h9gHjQ" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/TcXx_h9gHjQ/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - ChatGPT | The Intelligence Age | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/JeljVEwVf_U" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/JeljVEwVf_U/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - RIOT Character Effects - UNREAL | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/du1QDlI5iG8" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/du1QDlI5iG8/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : CATACLYSM TRAILER | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/n-jrzXM3oEc" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/n-jrzXM3oEc/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : The Whizzbanger - hyper | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/y5MI_OH_9_k" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/y5MI_OH_9_k/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : NIDHOGG - God Of War Ragnarök | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/UISazGs1WlI" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/UISazGs1WlI/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Documentary : Orcas Hunt | HD</h4><div class="work-meta"><span class="work-type">Re-Sound Complet</span></div></div>
+      </div>
+
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Re-Sound à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Re-Sound à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Re-Sound à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-plus">Incoming</span><span class="slot-label">Re-Sound à venir</span></div></div><div class="work-info"><h4 data-fr="Emplacement disponible" data-en="Available slot">Emplacement disponible</h4></div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--off-black);border-top:0.5px solid var(--border)">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-label">Contact</div>
+      <h2 data-fr="Un projet ?<br><em>Parlons-en.</em>" data-en="A project?<br><em>Let's talk.</em>">Un projet ?<br><em>Parlons-en.</em></h2>
+      <p data-fr="Basé en France, disponible en remote. Que ce soit pour un long métrage, un court-métrage, une série ou un projet individuel, n'hésitez pas." data-en="Based in France, available remotely. Whether it's a feature film, a short film, a series or an individual project, don't hesitate to reach out.">Basé en France, disponible en remote. Que ce soit pour un long métrage, un court-métrage, une série ou un projet individuel, n'hésitez pas.</p>
+      <div class="contact-links">
+        <a href="mailto:sdnathanpro@gmail.com" class="contact-link"><span class="contact-link-dot"></span>sdnathanpro@gmail.com</a>
+        <a href="https://linktr.ee/SDN_M" class="contact-link"><span class="contact-link-dot"></span>linktr.ee/SDN_M</a>
+        <a href="https://www.youtube.com/@SDN_M" class="contact-link"><span class="contact-link-dot"></span>YouTube · SDN_M</a>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" action="https://formspree.io/f/mgorplea" method="POST" id="contact-form">
+        <div class="form-field"><label data-fr="Nom" data-en="Name">Nom</label><input type="text" name="name" id="f-name" placeholder="Votre nom" required></div>
+        <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="votre@email.com" required></div>
+        <div class="form-field">
+          <label data-fr="Type de projet" data-en="Project type">Type de projet</label>
+          <select name="project_type" id="f-type">
+            <option value="" data-fr="Sélectionner" data-en="Select">Sélectionner</option>
+            <option data-fr="Long métrage" data-en="Feature film">Long métrage</option>
+            <option data-fr="Court-métrage" data-en="Short film">Court-métrage</option>
+            <option data-fr="Série / Animation" data-en="Series / Animation">Série / Animation</option>
+            <option data-fr="Publicité / Branding" data-en="Advertising / Branding">Publicité / Branding</option>
+            <option data-fr="Motion Design" data-en="Motion Design">Motion Design</option>
+            <option data-fr="Projet individuel" data-en="Individual project">Projet individuel</option>
+            <option data-fr="Autre" data-en="Other">Autre</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Message</label><textarea name="message" id="f-msg" placeholder="Décrivez votre projet..." required></textarea></div>
+        <input type="hidden" name="_subject" value="Nouveau message SDN Portfolio">
+        <button type="submit" class="form-submit" data-fr="Envoyer le message" data-en="Send message">Envoyer le message</button>
+        <p id="form-success" style="display:none;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--red);letter-spacing:0.1em;margin-top:1rem" data-fr="Message envoyé. Je vous répondrai rapidement." data-en="Message sent. I'll get back to you shortly.">Message envoyé. Je vous répondrai rapidement.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SDN</div>
+  <div class="footer-copy">2025 © SDN · <span data-fr="Tous droits réservés" data-en="All rights reserved">Tous droits réservés</span></div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)
+  document.getElementById('back-top').classList.toggle('visible',window.scrollY>400)
+})
+
+function setLang(lang){
+  document.getElementById('btn-fr').classList.toggle('active',lang==='fr')
+  document.getElementById('btn-en').classList.toggle('active',lang==='en')
+  document.querySelectorAll('[data-fr]').forEach(el=>{
+    const val=el.getAttribute('data-'+lang)
+    if(!val)return
+    if(el.tagName==='INPUT'&&el.type!=='submit'){el.placeholder=val}
+    else if(el.tagName==='OPTION'){el.textContent=val}
+    else{el.innerHTML=val}
+  })
+  document.getElementById('f-name').placeholder=lang==='fr'?'Votre nom':'Your name'
+  document.getElementById('f-msg').placeholder=lang==='fr'?'Décrivez votre projet...':'Describe your project...'
+}
+
+// FORMSPREE AJAX SUBMIT
+const form=document.getElementById('contact-form')
+if(form){
+  form.addEventListener('submit',async e=>{
+    e.preventDefault()
+    const btn=form.querySelector('.form-submit')
+    const success=document.getElementById('form-success')
+    btn.textContent='...'
+    btn.disabled=true
+    try{
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      if(res.ok){
+        success.style.display='block'
+        form.reset()
+      } else {
+        btn.textContent='Erreur réessayer'
+      }
+    } catch(err){
+      btn.textContent='Erreur réessayer'
+    }
+    btn.disabled=false
+  })
+}
+
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring')
+let mx=0,my=0,rx=0,ry=0
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'})
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing()
+document.querySelectorAll('a,button,.work-card,.demo-reel-card,.service-card,#back-top,.nav-logo').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'))
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'))
+})
+
+const canvas=document.getElementById('hero-canvas'),ctx=canvas.getContext('2d')
+let W,H,time=0
+
+function resize(){
+  W=canvas.width=canvas.offsetWidth
+  H=canvas.height=canvas.offsetHeight
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H)
+  time+=0.008
+
+  const centerY = H * 0.72
+  const numWaves = 4
+
+  for(let w=0;w<numWaves;w++){
+    const waveAmp = 18 + w * 14
+    const waveFreq = 0.018 - w * 0.003
+    const speed = 0.6 + w * 0.2
+    const alpha = 0.18 - w * 0.035
+    const yOffset = w * 6
+
+    ctx.beginPath()
+    for(let x=0;x<=W;x+=2){
+      const y1 = Math.sin(x * waveFreq + time * speed) * waveAmp
+      const y2 = Math.sin(x * waveFreq * 2.3 + time * speed * 1.4) * (waveAmp * 0.3)
+      const env = 0.6 + 0.4 * Math.sin(time * 0.3 + w * 0.8)
+      const y = centerY + yOffset + (y1 + y2) * env
+
+      if(x === 0) ctx.moveTo(x, y)
+      else ctx.lineTo(x, y)
+    }
+
+    ctx.strokeStyle = `rgba(208,25,26,${alpha})`
+    ctx.lineWidth = 1.2 - w * 0.2
+    ctx.stroke()
+  }
+
+  ctx.beginPath()
+  ctx.moveTo(0, centerY)
+  ctx.lineTo(W, centerY)
+  ctx.strokeStyle = 'rgba(208,25,26,0.06)'
+  ctx.lineWidth = 0.5
+  ctx.stroke()
+
+  requestAnimationFrame(draw)
+}
+
+window.addEventListener('resize',resize);resize();draw()
+// AMBIENT SOUND ENGINE
+let ambientCtx = null
+let ambientNodes = []
+let ambientActive = false
+
+function getAmbientCtx(){
+  if(!ambientCtx) ambientCtx = new (window.AudioContext||window.webkitAudioContext)()
+  return ambientCtx
+}
+
+function stopAmbient(){
+  ambientNodes.forEach(n=>{ try{ n.stop ? n.stop() : n.disconnect() }catch(e){} })
+  ambientNodes = []
+}
+
+function startCinematic(){
+  const ctx = getAmbientCtx()
+  const master = ctx.createGain()
+  master.gain.setValueAtTime(0, ctx.currentTime)
+  master.gain.linearRampToValueAtTime(0.020, ctx.currentTime + 4)
+  master.connect(ctx.destination)
+
+  // REVERB grande salle, projection dans l'espace
+  const reverbLen = ctx.sampleRate * 3.5
+  const reverbBuf = ctx.createBuffer(2, reverbLen, ctx.sampleRate)
+  for(let c=0;c<2;c++){
+    const d = reverbBuf.getChannelData(c)
+    for(let i=0;i<reverbLen;i++){
+      d[i] = (Math.random()*2-1) * Math.pow(1 - i/reverbLen, 2.2)
+    }
+  }
+  const reverb = ctx.createConvolver()
+  reverb.buffer = reverbBuf
+  const reverbGain = ctx.createGain()
+  reverbGain.gain.value = 0.55
+  const dryGain = ctx.createGain()
+  dryGain.gain.value = 0.45
+  // Bus reverb
+  const preReverb = ctx.createGain()
+  preReverb.connect(reverb)
+  reverb.connect(reverbGain)
+  reverbGain.connect(master)
+  preReverb.connect(dryGain)
+  dryGain.connect(master)
+
+  // COUCHE 1 Sub doux, très en retrait
+  const subFreqs = [55, 82.5]
+  subFreqs.forEach((freq, i)=>{
+    const osc = ctx.createOscillator()
+    const g = ctx.createGain()
+    const filt = ctx.createBiquadFilter()
+    filt.type = 'lowpass'; filt.frequency.value = 220; filt.Q.value = 0.4
+    const lfo = ctx.createOscillator()
+    const lfoG = ctx.createGain()
+    lfo.type = 'sine'; lfo.frequency.value = 0.025 + i*0.01
+    lfoG.gain.value = 0.025
+    lfo.connect(lfoG); lfoG.connect(g.gain)
+    osc.type = 'sine'; osc.frequency.value = freq
+    osc.frequency.linearRampToValueAtTime(freq * 1.002, ctx.currentTime + 15)
+    osc.frequency.linearRampToValueAtTime(freq * 0.999, ctx.currentTime + 32)
+    osc.connect(filt); filt.connect(g); g.connect(preReverb)
+    g.gain.value = 0.18 - i*0.05
+    osc.start(); lfo.start()
+    ambientNodes.push(osc, lfo)
+  })
+
+  // COUCHE 2 Pads aériens, filtre plus ouvert, moins denses
+  const padNotes = [220, 277.18, 329.63, 440]
+  padNotes.forEach((freq, i)=>{
+    const osc = ctx.createOscillator()
+    const g = ctx.createGain()
+    const filt = ctx.createBiquadFilter()
+    filt.type = 'lowpass'; filt.frequency.value = 1200 + i*120; filt.Q.value = 0.7
+    const lfoF = ctx.createOscillator()
+    const lfoFG = ctx.createGain()
+    lfoF.frequency.value = 0.04 + i*0.015
+    lfoFG.gain.value = 180
+    lfoF.connect(lfoFG); lfoFG.connect(filt.frequency)
+    const lfoV = ctx.createOscillator()
+    const lfoVG = ctx.createGain()
+    lfoV.frequency.value = 0.018 + i*0.008
+    lfoVG.gain.value = 0.03
+    lfoV.connect(lfoVG); lfoVG.connect(g.gain)
+    osc.type = 'sine'; osc.frequency.value = freq
+    osc.connect(filt); filt.connect(g); g.connect(preReverb)
+    g.gain.value = 0.10 - i*0.015
+    osc.start(); lfoF.start(); lfoV.start()
+    ambientNodes.push(osc, lfoF, lfoV)
+  })
+
+  // COUCHE 3 Vent très léger
+  const bufSize = ctx.sampleRate * 4
+  const buf = ctx.createBuffer(2, bufSize, ctx.sampleRate)
+  for(let c=0;c<2;c++){
+    const data = buf.getChannelData(c)
+    let b0=0,b1=0
+    for(let i=0;i<bufSize;i++){
+      const w = Math.random()*2-1
+      b0=b0*0.995+w*0.005; b1=b1*0.98+w*0.02
+      data[i]=(b0+b1)*0.12
+    }
+  }
+  const noise = ctx.createBufferSource()
+  noise.buffer = buf; noise.loop = true
+  const nFilt = ctx.createBiquadFilter()
+  nFilt.type = 'bandpass'; nFilt.frequency.value = 800; nFilt.Q.value = 0.3
+  const nGain = ctx.createGain(); nGain.gain.value = 0.10
+  const lfoN = ctx.createOscillator()
+  const lfoNG = ctx.createGain()
+  lfoN.frequency.value = 0.035; lfoNG.gain.value = 220
+  lfoN.connect(lfoNG); lfoNG.connect(nFilt.frequency)
+  const lfoNV = ctx.createOscillator()
+  const lfoNVG = ctx.createGain()
+  lfoNV.frequency.value = 0.022; lfoNVG.gain.value = 0.035
+  lfoNV.connect(lfoNVG); lfoNVG.connect(nGain.gain)
+  noise.connect(nFilt); nFilt.connect(nGain); nGain.connect(preReverb)
+  noise.start(); lfoN.start(); lfoNV.start()
+  ambientNodes.push(noise, lfoN, lfoNV, reverb, reverbGain, preReverb, dryGain, master)
+}
+
+function toggleAmbient(){
+  const btn = document.getElementById('ambient-btn')
+  const icon = document.getElementById('ambient-icon')
+  if(!ambientActive){
+    ambientActive = true
+    btn.classList.add('active')
+    icon.textContent = '♩'
+    startCinematic()
+    soundClick()
+  } else {
+    stopAmbient()
+    ambientActive = false
+    btn.classList.remove('active')
+    icon.textContent = '♩'
+    soundSwitch()
+  }
+}
+
+// MUTE GLOBAL
+let globalMuted = false
+
+function soundCrush(){
+  const ctx = getCtx()
+  const t = ctx.currentTime
+  const steps = [880, 660, 440, 330, 220, 110, 55]
+  steps.forEach((freq, i)=>{
+    const osc = ctx.createOscillator()
+    const g = ctx.createGain()
+    osc.connect(g); g.connect(ctx.destination)
+    osc.type = 'square'
+    const st = t + i * 0.035
+    osc.frequency.setValueAtTime(freq, st)
+    g.gain.setValueAtTime(0.026, st)
+    g.gain.exponentialRampToValueAtTime(0.001, st + 0.032)
+    osc.start(st); osc.stop(st + 0.036)
+  })
+}
+
+function soundUncrush(){
+  const ctx = getCtx()
+  const t = ctx.currentTime
+  const steps = [55, 110, 220, 330, 440, 660, 880]
+  steps.forEach((freq, i)=>{
+    const osc = ctx.createOscillator()
+    const g = ctx.createGain()
+    osc.connect(g); g.connect(ctx.destination)
+    osc.type = 'square'
+    const st = t + i * 0.03
+    osc.frequency.setValueAtTime(freq, st)
+    g.gain.setValueAtTime(0.021, st)
+    g.gain.exponentialRampToValueAtTime(0.001, st + 0.028)
+    osc.start(st); osc.stop(st + 0.032)
+  })
+}
+
+// Son retour accueil whoosh descendant + impact sourd
+function soundHome(){
+  const ctx = getCtx()
+  const t = ctx.currentTime
+  const r = 0.9 + Math.random() * 0.2
+  const osc = ctx.createOscillator()
+  const g = ctx.createGain()
+  const filt = ctx.createBiquadFilter()
+  filt.type = 'lowpass'; filt.frequency.value = 1400; filt.Q.value = 0.5
+  osc.connect(filt); filt.connect(g); g.connect(ctx.destination)
+  osc.type = 'sine'
+  osc.frequency.setValueAtTime(180*r, t)
+  osc.frequency.exponentialRampToValueAtTime(520*r, t + 0.14)
+  g.gain.setValueAtTime(0.0, t)
+  g.gain.linearRampToValueAtTime(0.06, t + 0.02)
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.18)
+  osc.start(t); osc.stop(t + 0.2)
+  const osc2 = ctx.createOscillator()
+  const g2 = ctx.createGain()
+  osc2.connect(g2); g2.connect(ctx.destination)
+  osc2.type = 'triangle'
+  osc2.frequency.setValueAtTime(660*r, t + 0.12)
+  g2.gain.setValueAtTime(0.05, t + 0.12)
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.28)
+  osc2.start(t + 0.12); osc2.stop(t + 0.3)
+}
+
+function toggleMute(){
+  const btn = document.getElementById('mute-btn')
+  const iconSound = document.getElementById('icon-sound')
+  const iconMuted = document.getElementById('icon-muted')
+  globalMuted = !globalMuted
+  if(globalMuted){
+    soundCrush()
+    setTimeout(()=>{
+      if(audioCtx) audioCtx.suspend()
+      if(ambientCtx) ambientCtx.suspend()
+    }, 280)
+    btn.classList.add('muted')
+    iconSound.style.display = 'none'
+    iconMuted.style.display = 'block'
+  } else {
+    if(audioCtx) audioCtx.resume()
+    if(ambientCtx) ambientCtx.resume()
+    setTimeout(()=> soundUncrush(), 50)
+    btn.classList.remove('muted')
+    iconSound.style.display = 'block'
+    iconMuted.style.display = 'none'
+  }
+}
+
+// Arrêt auto quand une iframe est cliquée
+document.querySelectorAll('iframe').forEach(iframe=>{
+  iframe.addEventListener('mouseenter',()=>{
+    if(ambientActive && ambientNodes.length){
+      const master = ambientNodes[ambientNodes.length-1]
+      if(master && master.gain){
+        master.gain.linearRampToValueAtTime(0, getAmbientCtx().currentTime + 0.8)
+      }
+    }
+  })
+  iframe.addEventListener('mouseleave',()=>{
+    if(ambientActive && ambientNodes.length){
+      const master = ambientNodes[ambientNodes.length-1]
+      if(master && master.gain){
+        master.gain.linearRampToValueAtTime(0.06, getAmbientCtx().currentTime + 1.2)
+      }
+    }
+  })
+})
+const AudioCtx = window.AudioContext || window.webkitAudioContext
+let audioCtx = null
+function getCtx(){ if(!audioCtx) audioCtx = new AudioCtx(); return audioCtx }
+
+// Son global doux, Nintendo-like, fréquence randomisée
+function soundClick(){
+  const ctx = getCtx()
+  const rand = 0.82 + Math.random() * 0.36
+  const baseFreq = 520 * rand
+  const osc = ctx.createOscillator()
+  const gain = ctx.createGain()
+  const filter = ctx.createBiquadFilter()
+  filter.type = 'lowpass'; filter.frequency.value = 2200; filter.Q.value = 0.8
+  osc.connect(filter); filter.connect(gain); gain.connect(ctx.destination)
+  osc.type = 'sine'
+  osc.frequency.setValueAtTime(baseFreq, ctx.currentTime)
+  osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.6, ctx.currentTime + 0.055)
+  gain.gain.setValueAtTime(0.0, ctx.currentTime)
+  gain.gain.linearRampToValueAtTime(0.056, ctx.currentTime + 0.006)
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.07)
+  osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.08)
+}
+
+// Son CTA "Travailler ensemble" positif, lumineux, montée affirmée
+function soundCTA(){
+  const ctx = getCtx()
+  const t = ctx.currentTime
+  const r = 0.92 + Math.random() * 0.16 // pitch randomizer ±8%
+  const pairs = [{f1:440*r, f2:660*r, delay:0}, {f1:550*r, f2:825*r, delay:0.07}]
+  pairs.forEach(({f1, f2, delay})=>{
+    const osc = ctx.createOscillator()
+    const g = ctx.createGain()
+    const filt = ctx.createBiquadFilter()
+    filt.type = 'lowpass'; filt.frequency.value = 3000; filt.Q.value = 0.8
+    osc.connect(filt); filt.connect(g); g.connect(ctx.destination)
+    osc.type = 'triangle'
+    osc.frequency.setValueAtTime(f1, t + delay)
+    osc.frequency.exponentialRampToValueAtTime(f2, t + delay + 0.06)
+    g.gain.setValueAtTime(0.0, t + delay)
+    g.gain.linearRampToValueAtTime(0.099, t + delay + 0.012)
+    g.gain.exponentialRampToValueAtTime(0.001, t + delay + 0.13)
+    osc.start(t + delay); osc.stop(t + delay + 0.15)
+  })
+  const osc3 = ctx.createOscillator()
+  const g3 = ctx.createGain()
+  osc3.connect(g3); g3.connect(ctx.destination)
+  osc3.type = 'sine'
+  osc3.frequency.setValueAtTime(1320*r, t + 0.1)
+  osc3.frequency.exponentialRampToValueAtTime(1760*r, t + 0.18)
+  g3.gain.setValueAtTime(0.0, t + 0.1)
+  g3.gain.linearRampToValueAtTime(0.0495, t + 0.13)
+  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.22)
+  osc3.start(t + 0.1); osc3.stop(t + 0.24)
+}
+
+function soundConfirm(){
+  const ctx = getCtx()
+  const r = 0.95 + Math.random() * 0.1
+  const notes = [330*r, 440*r, 550*r]
+  notes.forEach((freq, i)=>{
+    const osc = ctx.createOscillator()
+    const gain = ctx.createGain()
+    osc.connect(gain); gain.connect(ctx.destination)
+    osc.type = 'sine'
+    const t = ctx.currentTime + i * 0.07
+    osc.frequency.setValueAtTime(freq, t)
+    gain.gain.setValueAtTime(0.0, t)
+    gain.gain.linearRampToValueAtTime(0.1, t + 0.03)
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12)
+    osc.start(t); osc.stop(t + 0.13)
+  })
+}
+
+function soundSwitch(){
+  const ctx = getCtx()
+  const t = ctx.currentTime
+  const r = 0.88 + Math.random() * 0.24
+  const buf1 = ctx.createBuffer(1, ctx.sampleRate * 0.004, ctx.sampleRate)
+  const d1 = buf1.getChannelData(0)
+  for(let i=0;i<d1.length;i++) d1[i] = (Math.random()*2-1) * Math.exp(-i / (d1.length * 0.3))
+  const n1 = ctx.createBufferSource()
+  n1.buffer = buf1
+  const f1 = ctx.createBiquadFilter()
+  f1.type = 'bandpass'; f1.frequency.value = 3500*r; f1.Q.value = 2.5
+  const g1 = ctx.createGain()
+  n1.connect(f1); f1.connect(g1); g1.connect(ctx.destination)
+  g1.gain.setValueAtTime(0.101, t)
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.004)
+  n1.start(t); n1.stop(t + 0.006)
+  const osc = ctx.createOscillator()
+  const og = ctx.createGain()
+  const fOsc = ctx.createBiquadFilter()
+  fOsc.type = 'bandpass'; fOsc.frequency.value = 1200*r; fOsc.Q.value = 3
+  osc.connect(fOsc); fOsc.connect(og); og.connect(ctx.destination)
+  osc.type = 'sine'
+  osc.frequency.setValueAtTime(1200*r, t + 0.001)
+  osc.frequency.exponentialRampToValueAtTime(700*r, t + 0.035)
+  og.gain.setValueAtTime(0.067, t + 0.001)
+  og.gain.exponentialRampToValueAtTime(0.001, t + 0.04)
+  osc.start(t + 0.001); osc.stop(t + 0.045)
+}
+
+// Son clic vidéo lancement type jeu vidéo
+function soundPlay(){
+  const ctx = getCtx()
+  const t = ctx.currentTime
+  const r = 0.9 + Math.random() * 0.2
+  const notes = [330*r, 440*r, 554*r, 660*r]
+  notes.forEach((freq, i)=>{
+    const osc = ctx.createOscillator()
+    const g = ctx.createGain()
+    const filt = ctx.createBiquadFilter()
+    filt.type = 'lowpass'; filt.frequency.value = 3500; filt.Q.value = 0.6
+    osc.connect(filt); filt.connect(g); g.connect(ctx.destination)
+    osc.type = 'square'
+    const st = t + i * 0.045
+    osc.frequency.setValueAtTime(freq, st)
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.08, st + 0.04)
+    g.gain.setValueAtTime(0.0, st)
+    g.gain.linearRampToValueAtTime(0.042, st + 0.008)
+    g.gain.exponentialRampToValueAtTime(0.001, st + 0.09)
+    osc.start(st); osc.stop(st + 0.1)
+  })
+  const osc2 = ctx.createOscillator()
+  const g2 = ctx.createGain()
+  osc2.connect(g2); g2.connect(ctx.destination)
+  osc2.type = 'triangle'
+  osc2.frequency.setValueAtTime(880*r, t + 0.18)
+  osc2.frequency.exponentialRampToValueAtTime(1100*r, t + 0.26)
+  g2.gain.setValueAtTime(0.0, t + 0.18)
+  g2.gain.linearRampToValueAtTime(0.054, t + 0.2)
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.32)
+  osc2.start(t + 0.18); osc2.stop(t + 0.34)
+}
+
+// Assignation son play sur les vignettes Works
+document.querySelectorAll('.lazy-thumb, .demo-reel-thumb').forEach(el=>{
+  el.addEventListener('click', soundPlay)
+})
+
+document.querySelector('.nav-logo').addEventListener('click', soundHome)
+document.querySelector('#back-top').addEventListener('click', soundHome)
+document.querySelectorAll('.btn-primary').forEach(el=> el.addEventListener('click', soundCTA))
+document.querySelectorAll('.form-submit').forEach(el=> el.addEventListener('click', soundConfirm))
+document.querySelectorAll('.lang-btn').forEach(el=> el.addEventListener('click', soundSwitch))
+document.querySelectorAll('a:not(.btn-primary), .work-card, .demo-reel-card, .service-card, .btn-ghost').forEach(el=>{
+  el.addEventListener('click', soundClick)
+})
+
+// HAMBURGER MENU
+function toggleMobileMenu(){
+  const menu = document.getElementById('mobile-menu')
+  const btn = document.getElementById('hamburger')
+  const open = menu.classList.toggle('open')
+  btn.classList.toggle('open', open)
+  document.body.style.overflow = open ? 'hidden' : ''
+}
+function closeMobileMenu(){
+  document.getElementById('mobile-menu').classList.remove('open')
+  document.getElementById('hamburger').classList.remove('open')
+  document.body.style.overflow = ''
+}
+function updateMobileLang(lang){
+  document.getElementById('mob-btn-fr').classList.toggle('active', lang==='fr')
+  document.getElementById('mob-btn-en').classList.toggle('active', lang==='en')
+}
+
+// FORM VALIDATION retour visuel si champs vides
+const contactForm = document.getElementById('contact-form')
+if(contactForm){
+  const inputs = contactForm.querySelectorAll('input[required], textarea[required]')
+  inputs.forEach(input=>{
+    input.addEventListener('blur', ()=>{
+      if(!input.value.trim()){
+        input.style.borderColor = 'var(--red)'
+      } else {
+        input.style.borderColor = 'var(--border)'
+      }
+    })
+    input.addEventListener('input', ()=>{
+      if(input.value.trim()) input.style.borderColor = 'var(--border)'
+    })
+  })
+}
+
+// LAZY LOADING iframes chargées au clic
+function lazyLoad(thumb){
+  const src = thumb.getAttribute('data-src')
+  if(!src || thumb.querySelector('iframe')) return
+  const iframe = document.createElement('iframe')
+  iframe.src = src + '?autoplay=1'
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none'
+  iframe.allow = 'accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture'
+  iframe.allowFullscreen = true
+  thumb.innerHTML = ''
+  thumb.appendChild(iframe)
+}
+function lazyLoadVimeo(thumb){
+  const src = thumb.getAttribute('data-src')
+  if(!src || thumb.querySelector('iframe')) return
+  const iframe = document.createElement('iframe')
+  iframe.src = src + '?autoplay=1'
+  iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none'
+  iframe.allow = 'autoplay;fullscreen;picture-in-picture'
+  iframe.allowFullscreen = true
+  thumb.innerHTML = ''
+  thumb.appendChild(iframe)
+}
+</script>
+</body>
+</html>
