@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="canonical" href="https://sdnprod.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDN Sound Designer</title>
+<meta name="description" content="SDN Sound Designer indépendant. Sound design, montage son, mixage et voice design pour cinéma, série, animation et motion design. Remote-ready.">
+<meta name="keywords" content="sound designer, montage son, mixage, voice design, bruitage, foley, freelance, indépendant, cinéma, animation, série">
+<meta property="og:title" content="SDN Sound Designer">
+<meta property="og:description" content="Designing the unseen. Sound design, montage son et mixage au service de chaque projet.">
+<meta property="og:image" content="https://sdnprod.com/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SDN — Sound Designer">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="SDN">
+<meta property="og:url" content="https://sdnprod.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SDN Sound Designer">
+<meta name="twitter:image" content="https://sdnprod.com/img/og-image.jpg">
+<meta name="twitter:description" content="Designing the unseen. Sound design, montage son et mixage au service de chaque projet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "SDN — Sound Designer",
+  "alternateName": "SDN",
+  "url": "https://sdnprod.com",
+  "image": "https://sdnprod.com/img/og-image.jpg",
+  "logo": "https://sdnprod.com/img/og-image.jpg",
+  "email": "sdnathanpro@gmail.com",
+  "description": "Sound designer, monteur son et mixeur indépendant. Sound design, montage son, bruitage, voice design et mixage pour cinéma, série, animation, motion design et jeu vidéo.",
+  "areaServed": "Worldwide",
+  "availableLanguage": ["fr", "en", "es"],
+  "address": { "@type": "PostalAddress", "addressCountry": "FR" },
+  "sameAs": [
+    "https://www.youtube.com/@SDN_M",
+    "https://linktr.ee/SDN_M"
+  ],
+  "knowsAbout": ["Sound design", "Montage son", "Mixage", "Bruitage", "Foley", "Voice design", "Post-production audio"]
+}
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut"></button>
+
+<nav id="nav">
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:none" title="Retour en haut">SDN</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-fr="À propos" data-en="About" data-es="Sobre mí">À propos</a></li>
+      <li><a href="#services" data-fr="Services" data-en="Services" data-es="Servicios">Services</a></li>
+      <li><a href="#works" data-fr="Travaux" data-en="Works" data-es="Trabajos">Travaux</a></li>
+      <li><a href="#contact" data-fr="Contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button class="lang-btn" id="btn-fr" onclick="setLang('fr')"><img src="https://flagcdn.com/w20/fr.png" width="16" height="11" alt="FR" style="vertical-align:middle;margin-right:4px;border-radius:1px"> FR</button>
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')"><img src="https://flagcdn.com/w20/gb.png" width="16" height="11" alt="EN" style="vertical-align:middle;margin-right:4px;border-radius:1px"> EN</button>
+      <button class="lang-btn" id="btn-es" onclick="setLang('es')"><img src="https://flagcdn.com/w20/es.png" width="16" height="11" alt="ES" style="vertical-align:middle;margin-right:4px;border-radius:1px"> ES</button>
+    </div>
+    <button id="mute-btn" onclick="toggleMute()" title="Couper tous les sons">
+      <svg id="icon-sound" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+      <svg id="icon-muted" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+    </button>
+    <button id="theme-btn" onclick="toggleTheme()" title="Mode jour/nuit">
+      <svg id="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg id="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMobileMenu()" data-fr="À propos" data-en="About" data-es="Sobre mí">À propos</a>
+  <a href="#services" onclick="closeMobileMenu()" data-fr="Services" data-en="Services" data-es="Servicios">Services</a>
+  <a href="#works" onclick="closeMobileMenu()" data-fr="Travaux" data-en="Works" data-es="Trabajos">Travaux</a>
+  <a href="#contact" onclick="closeMobileMenu()" data-fr="Contact" data-en="Contact" data-es="Contacto">Contact</a>
+  <div class="mobile-menu-lang">
+    <button id="mob-btn-fr" onclick="setLang('fr');updateMobileLang('fr')"><img src="https://flagcdn.com/w20/fr.png" width="16" height="11" alt="FR" style="vertical-align:middle;margin-right:4px"> FR</button>
+    <button class="active" id="mob-btn-en" onclick="setLang('en');updateMobileLang('en')"><img src="https://flagcdn.com/w20/gb.png" width="16" height="11" alt="EN" style="vertical-align:middle;margin-right:4px"> EN</button>
+    <button id="mob-btn-es" onclick="setLang('es');updateMobileLang('es')"><img src="https://flagcdn.com/w20/es.png" width="16" height="11" alt="ES" style="vertical-align:middle;margin-right:4px"> ES</button>
+  </div>
+</div>
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-fr="Sound Designer · Monteur Son · Mixer" data-en="Sound Designer · Sound Editor · Mixer" data-es="Sound Designer · Editor de Sonido · Mixer">Sound Designer · Monteur Son · Mixer</div>
+    <h1 data-fr="Bienvenue" data-en="Welcome" data-es="Bienvenido">Bienvenue</h1>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary" data-fr="Travailler ensemble" data-en="Work together" data-es="Trabajar juntos">Travailler ensemble</a>
+      <a href="#works" class="btn-ghost" data-fr="Voir mes projets" data-en="See my work" data-es="Ver mis trabajos">Voir mes projets</a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>5+</strong><span data-fr="Ans d'expérience" data-en="Years experience" data-es="Años de experiencia">Ans d'expérience</span></div>
+      <div class="hero-stat"><strong>30+</strong><span data-fr="Projets livrés" data-en="Projects delivered" data-es="Proyectos entregados">Projets livrés</span></div>
+      <div class="hero-stat"><strong>100%</strong><span data-fr="Disponible à distance" data-en="Remote-ready" data-es="Disponible en remoto">Remote-ready</span></div>
+    </div>
+    <div class="hero-scroll-arrow" onclick="document.querySelector('.marquee-wrap').scrollIntoView({behavior:'smooth'})"></div>
+  </div>
+</section>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner" id="marquee-inner">
+    <span class="marquee-item" data-fr="Sound Design" data-en="Sound Design" data-es="Sound Design">Sound Design <span>✦</span></span>
+    <span class="marquee-item" data-fr="Montage Son" data-en="Sound Editing" data-es="Montaje de Sonido">Montage Son <span>✦</span></span>
+    <span class="marquee-item" data-fr="Mixage" data-en="Mixing" data-es="Mezcla">Mixage <span>✦</span></span>
+    <span class="marquee-item" data-fr="Voice Design" data-en="Voice Design" data-es="Diseño de Voz">Voice Design <span>✦</span></span>
+    <span class="marquee-item" data-fr="Foley" data-en="Foley" data-es="Foley">Foley <span>✦</span></span>
+    <span class="marquee-item" data-fr="Audio Post-Production" data-en="Audio Post-Production" data-es="Post-Producción de Audio">Audio Post-Production <span>✦</span></span>
+    <span class="marquee-item" data-fr="Field Recording" data-en="Field Recording" data-es="Grabación en Campo">Field Recording <span>✦</span></span>
+    <span class="marquee-item" data-fr="Montage Dialogue" data-en="Dialogue Editing" data-es="Montaje de Diálogo">Montage Dialogue <span>✦</span></span>
+    <span class="marquee-item" data-fr="Sound Design" data-en="Sound Design" data-es="Sound Design">Sound Design <span>✦</span></span>
+    <span class="marquee-item" data-fr="Montage Son" data-en="Sound Editing" data-es="Montaje de Sonido">Montage Son <span>✦</span></span>
+    <span class="marquee-item" data-fr="Mixage" data-en="Mixing" data-es="Mezcla">Mixage <span>✦</span></span>
+    <span class="marquee-item" data-fr="Voice Design" data-en="Voice Design" data-es="Diseño de Voz">Voice Design <span>✦</span></span>
+    <span class="marquee-item" data-fr="Foley" data-en="Foley" data-es="Foley">Foley <span>✦</span></span>
+    <span class="marquee-item" data-fr="Audio Post-Production" data-en="Audio Post-Production" data-es="Post-Producción de Audio">Audio Post-Production <span>✦</span></span>
+    <span class="marquee-item" data-fr="Field Recording" data-en="Field Recording" data-es="Grabación en Campo">Field Recording <span>✦</span></span>
+    <span class="marquee-item" data-fr="Montage Dialogue" data-en="Dialogue Editing" data-es="Montaje de Diálogo">Montage Dialogue <span>✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-text">
+      <div class="section-label" data-fr="À propos" data-en="About" data-es="Sobre mí">À propos</div>
+      <div class="section-title"><em style="font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--red);font-style:normal;font-size:1.3em;letter-spacing:0.05em">SDN</em>,<br>Sound Designer</div>
+      <p data-fr="Diplômé en ingénierie du son, montage et sound design, je travaille depuis plusieurs années sur des projets qui vont de la <strong>série animée</strong> au <strong>long métrage</strong>, en passant par la publicité et le motion design." data-en="With a degree in sound engineering, editing, and design, I've spent several years working on projects ranging from <strong>animated series</strong> to <strong>feature films</strong>, including advertising and motion design." data-es="Con estudios en ingeniería de sonido, montaje y diseño, llevo varios años trabajando en proyectos que van desde <strong>series animadas</strong> hasta <strong>largometrajes</strong>, pasando por publicidad y motion design.">Diplômé en ingénierie du son, montage et sound design, je travaille depuis plusieurs années sur des projets qui vont de la <strong>série animée</strong> au <strong>long métrage</strong>, en passant par la publicité et le motion design.</p>
+      <p data-fr="Mon studio est entièrement pensé pour le <strong>travail à distance</strong>. Workflow fluide, échanges clairs, livraisons dans les délais. J'accompagne chaque projet du premier échange jusqu'au master final." data-en="My studio is fully set up for <strong>remote work</strong>. Smooth workflow, clear communication, on-time delivery. I support every project from the first exchange to the final master." data-es="Mi estudio está completamente preparado para el <strong>trabajo remoto</strong>. Flujo de trabajo fluido, comunicación clara, entrega en tiempo. Acompaño cada proyecto desde el primer intercambio hasta el master final.">Mon studio est entièrement pensé pour le <strong>travail à distance</strong>. Workflow fluide, échanges clairs, livraisons dans les délais. J'accompagne chaque projet du premier échange jusqu'au master final.</p>
+      <p data-fr="Et j'aime bien le rouge." data-en="And I have a thing for red." data-es="Y me gusta el rojo.">Et j'aime bien le rouge.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2020</div>
+          <div class="timeline-desc" data-fr="<strong>Brevet de technicien son audiovisuel</strong>" data-en="<strong>Audiovisual Sound Technician diploma</strong>" data-es="<strong>Diploma de Técnico de Sonido Audiovisual</strong>"><strong>Brevet de technicien son audiovisuel</strong></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-desc" data-fr="<strong>Premiers projets professionnels</strong>" data-en="<strong>First professional projects</strong>" data-es="<strong>Primeros proyectos profesionales</strong>"><strong>Premiers projets professionnels</strong></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-desc" data-fr="<strong>Diplôme en montage son linéaire et sound design.</strong> Collaboration avec ArtFX, contrat avec Piste Rouge" data-en="<strong>Degree in linear sound editing and sound design.</strong> Collaboration with ArtFX, contract with Piste Rouge" data-es="<strong>Título en montaje de sonido lineal y sound design.</strong> Colaboración con ArtFX, contrato con Piste Rouge"><strong>Diplôme en montage son linéaire et sound design.</strong> Collaboration avec ArtFX, contrat avec Piste Rouge</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-desc" data-fr="<strong>Studio personnel opérationnel.</strong> Workflow remote complet, multicanal et broadcast-ready" data-en="<strong>Personal studio operational.</strong> Full remote workflow, multichannel and broadcast-ready" data-es="<strong>Estudio personal operativo.</strong> Flujo de trabajo remoto completo, multicanal y listo para broadcast"><strong>Studio personnel opérationnel.</strong> Workflow remote complet, multicanal et broadcast-ready</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-desc" data-fr="<strong>Collaboration avec Epic Mountain</strong> et des projets indépendants" data-en="<strong>Collaboration with Epic Mountain</strong> and independent projects" data-es="<strong>Colaboración con Epic Mountain</strong> y proyectos independientes"><strong>Collaboration avec Epic Mountain</strong> et des projets indépendants</div>
+        </div>
+      </div>
+
+      <div class="about-specs">
+        <div class="spec-item"><strong>Pro Tools / Reaper / Ableton</strong>DAW</div>
+        <div class="spec-item"><strong>Adam Audio 3.1 LCR + Sub</strong>Monitoring</div>
+        <div class="spec-item"><strong>AKG C414 / Shure SM7B / RØDE NTG5</strong>Micros</div>
+        <div class="spec-item"><strong>Scarlett 18i20 3rd Gen</strong>Interface</div>
+        <div class="spec-item"><strong>FabFilter / iZotope RX / NUGEN...</strong>Plugins</div>
+        <div class="spec-item"><strong>Tascam Portacapture X8</strong>Terrain</div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-img-frame" style="width:88%;margin:0 auto">
+        <img src="img/nathan-sound-designer.webp" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%" alt="Nathan, Sound Designer">
+      </div>
+      <div class="about-badge"><strong>5+</strong><small data-fr="ans d'expérience" data-en="years experience" data-es="años de experiencia">ans d'expérience</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="section-label" data-fr="Services" data-en="Services" data-es="Servicios">Services</div>
+  <div class="section-title" data-fr="Mes prestations" data-en="What I do" data-es="What I do">Mes prestations</div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-num">01</div><h3 data-fr="Sound Design" data-en="Sound Design" data-es="Sound Design">Sound Design</h3><p data-fr="Conception sonore complète pour l'image : effets, ambiances, textures. Chaque élément est créé sur mesure pour révéler l'intention narrative." data-en="Full sound design for picture: effects, ambiences, textures. Every element crafted to reveal the narrative intent." data-es="Diseño de sonido completo para imagen: efectos, ambientes, texturas. Cada elemento creado para revelar la intención narrativa.">Conception sonore complète pour l'image : effets, ambiances, textures. Chaque élément est créé sur mesure pour révéler l'intention narrative.</p></div>
+    <div class="service-card"><div class="service-num">02</div><h3 data-fr="Montage Son" data-en="Sound Editing" data-es="Montaje de Sonido">Montage Son</h3><p data-fr="Assemblage, synchronisation et traitement de la bande son. Chaque élément est à sa place, pour une lisibilité claire et un rythme maîtrisé." data-en="Assembly, synchronisation and treatment of the soundtrack. Every element in place, for clear readability and controlled pacing." data-es="Ensamblaje, sincronización y tratamiento de la banda sonora. Cada elemento en su lugar, para una lectura clara y un ritmo controlado.">Assemblage, synchronisation et traitement de la bande son. Chaque élément est à sa place, pour une lisibilité claire et un rythme maîtrisé.</p></div>
+    <div class="service-card"><div class="service-num">03</div><h3>Mixage</h3><p data-fr="Mixage stéréo et multicanal pour broadcast, cinéma ou web. Balance, dynamique et cohérence de A à Z." data-en="Stereo and multichannel mixing for broadcast, cinema or web. Balance, dynamics and consistency from A to Z." data-es="Mezcla estéreo y multicanal para broadcast, cine o web. Balance, dinámica y coherencia de la A a la Z.">Mixage stéréo et multicanal pour broadcast, cinéma ou web. Balance, dynamique et cohérence de A à Z.</p></div>
+    <div class="service-card"><div class="service-num">04</div><h3 data-fr="Dialogue Editing &amp; Voice Design" data-en="Dialogue Editing &amp; Voice Design" data-es="Montaje de Diálogo &amp; Diseño de Voz">Dialogue Editing &amp; Voice Design</h3><p data-fr="Montage, nettoyage et alignement des dialogues. Voice design sur mesure pour incarner personnages, narrations et identités sonores." data-en="Dialogue editing, cleanup and alignment. Custom voice design to embody characters, narrations and sonic identities." data-es="Montaje, limpieza y alineación de diálogo. Diseño de voz personalizado para personajes, narraciones e identidades sonoras.">Montage, nettoyage et alignement des dialogues. Voice design sur mesure pour incarner personnages, narrations et identités sonores.</p></div>
+    <div class="service-card"><div class="service-num">05</div><h3 data-fr="Bruitage &amp; Field Recording" data-en="Foley &amp; Field Recording" data-es="Foley &amp; Grabación en Campo">Bruitage &amp; Field Recording</h3><p data-fr="Captation terrain et bruitage sur mesure. Des textures organiques uniques, créées pour le projet, jamais issues de banques standards." data-en="Location recording and custom foley. Unique organic textures created for the project, never sourced from standard libraries." data-es="Grabación en locación y foley a medida. Texturas orgánicas únicas creadas para el proyecto, nunca extraídas de bibliotecas estándar.">Captation terrain et bruitage sur mesure. Des textures organiques uniques, créées pour le projet, jamais issues de banques standards.</p></div>
+    <div class="service-card"><div class="service-num">06</div><h3>Audio Branding</h3><p data-fr="Création d'identités sonores : logo audio, jingle, habillage. Une signature cohérente, pensée pour marquer durablement l'écoute." data-en="Sonic identity creation: audio logo, jingle, branding. A coherent signature, designed to make a lasting impression." data-es="Creación de identidad sonora: logo de audio, jingle, branding. Una firma coherente, diseñada para dejar huella.">Création d'identités sonores : logo audio, jingle, habillage. Une signature cohérente, pensée pour marquer durablement l'écoute.</p></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div style="display:flex;justify-content:center;padding:0;background:var(--off-black)"><div style="width:60px;height:1.5px;background:var(--red);opacity:0.6"></div></div>
+
+<section class="process-section" id="process">
+  <div class="section-label" data-fr="Processus" data-en="Process" data-es="Proceso">Processus</div>
+  <div class="section-title" data-fr="Comment je travaille" data-en="How I work" data-es="Cómo trabajo">Comment je travaille</div>
+  <div class="process-grid">
+    <div class="process-step"><div class="process-num">01</div><div class="process-icon"></div><h3 data-fr="Brief &amp; Écoute" data-en="Brief &amp; Listen" data-es="Brief &amp; Escucha">Brief &amp; Écoute</h3><p data-fr="On commence par comprendre le projet en profondeur : intentions, références, contraintes. J'analyse l'image et propose une direction sonore claire. Chaque choix est pensé en amont, rien n'est laissé au hasard." data-en="We start by understanding the project in depth: intentions, references, constraints. I analyse the image and propose a clear sonic direction. Every choice is considered upfront, nothing is left to chance." data-es="Empezamos por entender el proyecto en profundidad: intenciones, referencias, restricciones. Analizo la imagen y propongo una dirección sonora clara. Cada elección se piensa de antemano, nada se deja al azar.">On commence par comprendre le projet en profondeur : intentions, références, contraintes. J'analyse l'image et propose une direction sonore claire. Chaque choix est pensé en amont, rien n'est laissé au hasard.</p></div>
+    <div class="process-step"><div class="process-num">02</div><div class="process-icon"></div><h3 data-fr="Production" data-en="Production" data-es="Producción">Production</h3><p data-fr="Je travaille depuis mon studio, avec un suivi fluide et transparent. Livraisons régulières, ajustements rapides, communication directe. Vous avancez avec une vision claire à chaque étape." data-en="I work from my studio with smooth, transparent communication. Regular deliveries, quick adjustments, direct contact. You move forward with a clear picture at every stage." data-es="Trabajo desde mi estudio con una comunicación fluida y transparente. Entregas regulares, ajustes rápidos, contacto directo. Avanzas con una visión clara en cada etapa.">Je travaille depuis mon studio, avec un suivi fluide et transparent. Livraisons régulières, ajustements rapides, communication directe. Vous avancez avec une vision claire à chaque étape.</p></div>
+    <div class="process-step"><div class="process-num">03</div><div class="process-icon"></div><h3 data-fr="Livraison" data-en="Delivery" data-es="Entrega">Livraison</h3><p data-fr="Fichiers livrés dans les formats adaptés à votre diffusion. Mix final propre, maîtrisé et prêt à être diffusé web, broadcast ou cinéma. Respect des délais, sans compromis sur la qualité." data-en="Files delivered in the formats suited to your distribution. Final mix clean, mastered and ready for web, broadcast or cinema. On time, no compromise on quality." data-es="Archivos entregados en los formatos adecuados para tu distribución. Mix final limpio, masterizado y listo para web, broadcast o cine. En plazo, sin comprometer la calidad.">Fichiers livrés dans les formats adaptés à votre diffusion. Mix final propre, maîtrisé et prêt à être diffusé web, broadcast ou cinéma. Respect des délais, sans compromis sur la qualité.</p></div>
+  </div>
+  <div class="process-diagram">
+    <svg viewBox="-20 -25 840 540" role="img" aria-label="SDN Audio Pipeline">
+      <defs>
+        <marker id="pda" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <marker id="pda2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+      </defs>
+      <rect x="251" y="22" width="276" height="44" rx="4" fill="none" stroke="var(--muted)" stroke-width="0.5" stroke-dasharray="4 3"/>
+      <text font-family="DM Mono,monospace" font-size="8" letter-spacing="1" fill="var(--muted)" x="389" y="40" text-anchor="middle" data-fr="VOIX · MUSIQUE" data-en="VOICE · MUSIC" data-es="VOZ · MÚSICA">VOICE · MUSIC</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="389" y="56" text-anchor="middle" data-fr="Comédiens · Compositeur · Production — selon avancement" data-en="Cast · Composer · Production — depending on schedule" data-es="Actores · Compositor · Producción — según avance">Cast · Composer · Production — depending on schedule</text>
+      <line class="pd-fl2" x1="289" y1="68" x2="289" y2="108" stroke="var(--muted)" stroke-width="1" marker-end="url(#pda)"/>
+      <line class="pd-fl2" x1="489" y1="68" x2="489" y2="108" stroke="var(--muted)" stroke-width="1" marker-end="url(#pda)"/>
+      <rect x="20" y="110" width="138" height="160" rx="4" fill="none" stroke="var(--muted)" stroke-width="0.5"/>
+      <rect x="20" y="110" width="138" height="3" rx="2" fill="var(--muted)"/>
+      <text font-family="DM Mono,monospace" font-size="9" letter-spacing="1" fill="var(--muted)" x="89" y="130" text-anchor="middle" data-fr="BRIEF" data-en="BRIEF" data-es="BRIEF">BRIEF</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--red)" x="89" y="144" text-anchor="middle" data-fr="Consultation · Direction artistique" data-en="Consultation · Art Direction" data-es="Consulta · Dirección artística">Consultation · Art Direction</text>
+      <line x1="34" y1="150" x2="144" y2="150" stroke="var(--border)" stroke-width="0.5" opacity="0.5"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="89" y="168" text-anchor="middle" data-fr="Analyse" data-en="Analysis" data-es="Análisis">Analysis</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="89" y="183" text-anchor="middle" data-fr="Références · Intentions" data-en="References · Intentions" data-es="Referencias · Intenciones">References · Intentions</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="89" y="198" text-anchor="middle" data-fr="Direction artistique" data-en="Art direction" data-es="Dirección artística">Art direction</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="89" y="213" text-anchor="middle" data-fr="Format validé" data-en="Format locked" data-es="Formato definido">Format locked</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="89" y="258" text-anchor="middle" data-fr="01" data-en="01" data-es="01">01</text>
+      <line class="pd-fl" x1="160" y1="190" x2="218" y2="190" stroke="var(--red)" stroke-width="1.5" marker-end="url(#pda)"/>
+      <rect x="220" y="110" width="138" height="160" rx="4" fill="rgba(208,25,26,0.05)" stroke="var(--red)" stroke-width="0.5"/>
+      <rect x="220" y="110" width="138" height="3" rx="2" fill="var(--red)"/>
+      <text font-family="DM Mono,monospace" font-size="8" letter-spacing="1" fill="var(--red)" x="289" y="130" text-anchor="middle" data-fr="SOUND DESIGN" data-en="SOUND DESIGN" data-es="SOUND DESIGN">SOUND DESIGN</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="289" y="144" text-anchor="middle" data-fr="Linéaire · Sync image" data-en="Linear · Image sync" data-es="Lineal · Sync imagen">Linear · Image sync</text>
+      <line x1="234" y1="150" x2="344" y2="150" stroke="var(--red)" stroke-width="0.5" opacity="0.3"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="289" y="168" text-anchor="middle" data-fr="Montage son" data-en="Sound editing" data-es="Montaje de sonido">Sound editing</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="289" y="183" text-anchor="middle" data-fr="SFX" data-en="SFX" data-es="SFX">SFX</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="289" y="198" text-anchor="middle" data-fr="Foley" data-en="Foley" data-es="Foley">Foley</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="289" y="213" text-anchor="middle" data-fr="Traitement des voix" data-en="Voice processing" data-es="Procesamiento de voz">Voice processing</text>
+      <line x1="234" y1="220" x2="344" y2="220" stroke="var(--red)" stroke-width="0.5" opacity="0.2"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--red)" x="289" y="233" text-anchor="middle" data-fr="Preview" data-en="Preview" data-es="Preview">Preview</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="289" y="247" text-anchor="middle" data-fr="V1 · V2 si besoin" data-en="V1 · V2 if needed" data-es="V1 · V2 si es necesario">V1 · V2 if needed</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="289" y="258" text-anchor="middle" data-fr="02" data-en="02" data-es="02">02</text>
+      <line class="pd-fl" x1="360" y1="190" x2="418" y2="190" stroke="var(--red)" stroke-width="1.5" marker-end="url(#pda)"/>
+      <rect x="420" y="110" width="138" height="160" rx="4" fill="rgba(208,25,26,0.05)" stroke="var(--red)" stroke-width="0.5"/>
+      <rect x="420" y="110" width="138" height="3" rx="2" fill="var(--red)"/>
+      <text font-family="DM Mono,monospace" font-size="8" letter-spacing="1" fill="var(--red)" x="489" y="130" text-anchor="middle" data-fr="MIXING" data-en="MIXING" data-es="MIXING">MIXING</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="489" y="144" text-anchor="middle" data-fr="Voix · Musique · SFX" data-en="Voice · Music · SFX" data-es="Voz · Música · SFX">Voice · Music · SFX</text>
+      <line x1="434" y1="150" x2="544" y2="150" stroke="var(--red)" stroke-width="0.5" opacity="0.3"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="489" y="168" text-anchor="middle" data-fr="Équilibre narratif" data-en="Narrative balance" data-es="Equilibrio narrativo">Narrative balance</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="489" y="183" text-anchor="middle" data-fr="Cohérence sonore" data-en="Sound consistency" data-es="Coherencia sonora">Sound consistency</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="489" y="198" text-anchor="middle" data-fr="Mastering" data-en="Mastering" data-es="Mastering">Mastering</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="489" y="213" text-anchor="middle" data-fr="Specs format" data-en="Format specs" data-es="Specs de formato">Format specs</text>
+      <line x1="434" y1="220" x2="544" y2="220" stroke="var(--red)" stroke-width="0.5" opacity="0.2"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--red)" x="489" y="233" text-anchor="middle" data-fr="Preview" data-en="Preview" data-es="Preview">Preview</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="489" y="247" text-anchor="middle" data-fr="V1 · V2 · V3" data-en="V1 · V2 · V3" data-es="V1 · V2 · V3">V1 · V2 · V3</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="489" y="258" text-anchor="middle" data-fr="03" data-en="03" data-es="03">03</text>
+      <line class="pd-fl" x1="560" y1="190" x2="618" y2="190" stroke="var(--red)" stroke-width="1.5" marker-end="url(#pda)"/>
+      <rect x="620" y="110" width="138" height="160" rx="4" fill="rgba(208,25,26,0.18)" stroke="var(--red)" stroke-width="1"/>
+      <rect x="620" y="110" width="138" height="3" rx="2" fill="var(--red)"/>
+      <text font-family="DM Mono,monospace" font-size="9" letter-spacing="2" fill="var(--text)" x="689" y="130" text-anchor="middle" data-fr="LIVRAISON" data-en="DELIVERY" data-es="ENTREGA">DELIVERY</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--red)" x="689" y="144" text-anchor="middle" data-fr="Livrables finaux" data-en="Final deliverables" data-es="Entregables finales">Final deliverables</text>
+      <line x1="634" y1="150" x2="744" y2="150" stroke="var(--red)" stroke-width="0.5" opacity="0.5"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="689" y="168" text-anchor="middle" data-fr="Export Stems" data-en="Stems export" data-es="Export de stems">Stems export</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="689" y="183" text-anchor="middle" data-fr="Masters par format" data-en="Masters per format" data-es="Masters por formato">Masters per format</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="689" y="198" text-anchor="middle" data-fr="Web · Broadcast" data-en="Web · Broadcast" data-es="Web · Broadcast">Web · Broadcast</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="689" y="213" text-anchor="middle" data-fr="Cinéma" data-en="Cinema" data-es="Cine">Cinema</text>
+      <line x1="634" y1="220" x2="744" y2="220" stroke="var(--red)" stroke-width="0.5" opacity="0.5"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--text)" x="689" y="235" text-anchor="middle" data-fr="Validé par le réalisateur" data-en="Approved by director" data-es="Aprobado por el director">Approved by director</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--text)" x="689" y="249" text-anchor="middle" data-fr="ou la production ✓" data-en="or production ✓" data-es="o la producción ✓">or production ✓</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--red)" x="689" y="258" text-anchor="middle" data-fr="04" data-en="04" data-es="04">04</text>
+      <path class="pd-fl3" d="M289 272 L289 304 Q289 316 301 316 L477 316 Q489 316 489 304 L489 272" fill="none" stroke="var(--border)" stroke-width="0.8" marker-end="url(#pda2)"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="389" y="330" text-anchor="middle" data-fr="Retours · Ajustements" data-en="Feedback · Adjustments" data-es="Comentarios · Ajustes">Feedback · Adjustments</text>
+      <rect x="220" y="370" width="138" height="40" rx="4" fill="none" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4 3"/>
+      <text font-family="DM Mono,monospace" font-size="8" letter-spacing="1" fill="var(--muted)" x="289" y="387" text-anchor="middle" data-fr="TIME LOCKED" data-en="TIME LOCKED" data-es="TIME LOCKED">TIME LOCKED</text>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--border)" x="289" y="401" text-anchor="middle" data-fr="Montage fixe · Durée fixe" data-en="Fixed edit · Fixed duration" data-es="Edición fija · Duración fija">Fixed edit · Fixed duration</text>
+      <line class="pd-fl2" x1="289" y1="370" x2="289" y2="272" stroke="var(--border)" stroke-width="1" marker-end="url(#pda)"/>
+      <line x1="20" y1="428" x2="780" y2="428" stroke="var(--border)" stroke-width="0.5" opacity="0.3"/>
+      <line x1="20" y1="444" x2="44" y2="444" stroke="var(--red)" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="50" y="447" data-fr="Flux principal" data-en="Main flow" data-es="Flujo principal">Main flow</text>
+      <line x1="130" y1="444" x2="154" y2="444" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 4"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="160" y="447" data-fr="Entrées externes" data-en="External inputs" data-es="Entradas externas">External inputs</text>
+      <line x1="270" y1="444" x2="294" y2="444" stroke="var(--border)" stroke-width="0.8" stroke-dasharray="3 5"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="300" y="447" data-fr="Boucle retours" data-en="Feedback loop" data-es="Bucle de retornos">Feedback loop</text>
+      <rect x="400" y="438" width="26" height="12" rx="2" fill="rgba(208,25,26,0.18)" stroke="var(--red)" stroke-width="1"/>
+      <text font-family="DM Mono,monospace" font-size="7" fill="var(--muted)" x="432" y="447" data-fr="Livrable final" data-en="Final deliverable" data-es="Entregable final">Final deliverable</text>
+      <!-- Bouton Glossary inline SVG -->
+      <g id="pd-btn-svg" onclick="soundClick();document.getElementById('pd-glossary').classList.toggle('open')" style="cursor:pointer">
+        <rect x="651" y="436" width="76" height="18" rx="3" fill="rgba(208,25,26,0.12)" stroke="var(--red)" stroke-width="0.5"/>
+        <svg x="656" y="440" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="10" y1="8" x2="16" y2="8"/><line x1="10" y1="12" x2="16" y2="12"/></svg>
+        <text font-family="DM Mono,monospace" font-size="7" fill="var(--red)" x="670" y="447" letter-spacing="1">GLOSSARY</text>
+      </g>
+    </svg>
+    <div id="pd-glossary">
+      <button id="pd-close" onclick="soundClick();document.getElementById('pd-glossary').classList.remove('open')" aria-label="Close glossary">✕</button>
+      <h3 data-fr="Glossaire" data-en="Glossary" data-es="Glosario">Glossary</h3>
+      <div class="pd-term"><div class="pd-name" data-fr="Time Locked" data-en="Time Locked" data-es="Time Locked">Time Locked</div><div class="pd-def" data-fr="Le montage est finalisé avant tout travail sonore. La durée et les coupes sont fixes, aucun changement autorisé en cours de production pour éviter toute conformation." data-en="The edit is finalized before sound work begins. Picture length and cut points are fixed, no changes allowed during production to avoid costly re-syncing." data-es="El montaje se finaliza antes del trabajo de sonido. La duración y los cortes son fijos, sin cambios permitidos durante la producción para evitar la conformación.">The edit is finalized before sound work begins. Picture length and cut points are fixed, no changes allowed during production to avoid costly re-syncing.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Montage Son" data-en="Sound Editing" data-es="Montaje de Sonido">Sound Editing</div><div class="pd-def" data-fr="Processus d'assemblage et de synchronisation de tous les éléments audio à l'image, dialogues, ambiances, effets, image par image." data-en="The process of assembling and synchronizing all audio elements to picture, dialogue, ambiences, effects, frame by frame." data-es="Proceso de ensamblaje y sincronización de todos los elementos de audio con la imagen, diálogos, ambientes, efectos, fotograma a fotograma.">The process of assembling and synchronizing all audio elements to picture, dialogue, ambiences, effects, frame by frame.</div></div>
+      <div class="pd-term"><div class="pd-name">SFX</div><div class="pd-def" data-fr="Effets sonores. Sons créés ou enregistrés qui donnent vie aux événements à l'écran : impacts, ambiances, sons UI, transitions." data-en="Sound Effects. Designed or recorded sounds that bring life to on-screen events: impacts, atmospheres, UI sounds, transitions." data-es="Efectos de sonido. Sonidos diseñados o grabados que dan vida a los eventos en pantalla: impactos, atmósferas, sonidos UI, transiciones.">Sound Effects. Designed or recorded sounds that bring life to on-screen events: impacts, atmospheres, UI sounds, transitions.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Foley" data-en="Foley" data-es="Foley">Foley</div><div class="pd-def" data-fr="Sons du quotidien recréés et enregistrés en sync avec l'image, pas, tissus, accessoires. Nommé d'après le pionnier Jack Foley." data-en="Recreated everyday sounds performed and recorded in sync with the image, footsteps, cloth, props. Named after pioneer Jack Foley." data-es="Sonidos cotidianos recreados y grabados en sincronía con la imagen, pasos, telas, accesorios. Nombrado así por el pionero Jack Foley.">Recreated everyday sounds performed and recorded in sync with the image, footsteps, cloth, props. Named after pioneer Jack Foley.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Traitement des Voix" data-en="Voice Processing" data-es="Procesamiento de Voz">Voice Processing</div><div class="pd-def" data-fr="Nettoyage, égalisation et placement des dialogues enregistrés dans l'environnement sonore du projet. Inclut la suppression du bruit et la mise en perspective." data-en="Cleaning, equalizing and placing recorded dialogue into the sonic environment of the project. Includes noise removal and perspective matching." data-es="Limpieza, ecualización y colocación de los diálogos grabados en el entorno sonoro del proyecto. Incluye eliminación de ruido y ajuste de perspectiva.">Cleaning, equalizing and placing recorded dialogue into the sonic environment of the project. Includes noise removal and perspective matching.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Mastering" data-en="Mastering" data-es="Mastering">Mastering</div><div class="pd-def" data-fr="Étape finale du traitement audio qui optimise le mix pour un format de distribution spécifique, loudness, dynamique et équilibre fréquentiel." data-en="Final stage of audio processing that optimizes the mix for a specific distribution format, loudness, dynamic range, and frequency balance." data-es="Etapa final del procesamiento de audio que optimiza el mix para un formato de distribución específico, loudness, rango dinámico y equilibrio de frecuencias.">Final stage of audio processing that optimizes the mix for a specific distribution format, loudness, dynamic range, and frequency balance.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Stems" data-en="Stems" data-es="Stems">Stems</div><div class="pd-def" data-fr="Exports audio séparés par catégorie : stem dialogue, stem musique, stem effets. Permet un contrôle précis lors de la diffusion ou du doublage." data-en="Separate audio exports grouped by category: dialogue stem, music stem, effects stem. Allows precise control during broadcast or dubbing." data-es="Exportaciones de audio separadas por categoría: stem de diálogo, stem de música, stem de efectos. Permite un control preciso durante la emisión o el doblaje.">Separate audio exports grouped by category: dialogue stem, music stem, effects stem. Allows precise control during broadcast or dubbing.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Specs Format" data-en="Format Specs" data-es="Specs de Formato">Format Specs</div><div class="pd-def" data-fr="Exigences techniques par canal de distribution. Web (−14 LUFS stéréo), Broadcast (−23 LUFS, 5.1), Cinéma (−20 LUFS, Dolby Atmos) ont chacun leurs normes de loudness et codec." data-en="Technical requirements per distribution channel. Web (−14 LUFS stereo), Broadcast (−23 LUFS, 5.1), Cinema (−20 LUFS, Dolby Atmos) each have distinct loudness and codec standards." data-es="Requisitos técnicos por canal de distribución. Web (−14 LUFS estéreo), Broadcast (−23 LUFS, 5.1), Cine (−20 LUFS, Dolby Atmos) tienen cada uno sus normas de loudness y codec.">Technical requirements per distribution channel. Web (−14 LUFS stereo), Broadcast (−23 LUFS, 5.1), Cinema (−20 LUFS, Dolby Atmos) each have distinct loudness and codec standards.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Preview" data-en="Preview" data-es="Preview">Preview</div><div class="pd-def" data-fr="Export intermédiaire envoyé au client ou au réalisateur en cours de production. Permet de valider les choix créatifs avant le mix final, évite les changements coûteux de dernière minute." data-en="An intermediate export sent to the client or director during production. Allows validation of creative choices before the final mix, avoids costly last-minute changes." data-es="Exportación intermedia enviada al cliente o director durante la producción. Permite validar las decisiones creativas antes del mix final, evita cambios costosos de última hora.">An intermediate export sent to the client or director during production. Allows validation of creative choices before the final mix, avoids costly last-minute changes.</div></div>
+      <div class="pd-term"><div class="pd-name" data-fr="Linéaire" data-en="Linear" data-es="Lineal">Linear</div><div class="pd-def" data-fr="Méthode de travail où l'audio est monté et synchronisé directement contre l'image verrouillée, du début à la fin, en temps réel avec l'image." data-en="Working method where audio is edited and synchronized directly against the locked picture, from start to finish, in real time with the image." data-es="Método de trabajo donde el audio se edita y sincroniza directamente sobre la imagen bloqueada, de principio a fin, en tiempo real con la imagen.">Working method where audio is edited and synchronized directly against the locked picture, from start to finish, in real time with the image.</div></div>
+    </div>
+  </div>
+
+  <div class="process-diagram-mobile">
+    <div class="pdm-step">
+      <div class="pdm-num">01</div>
+      <div class="pdm-content">
+        <div class="pdm-title" data-fr="Brief" data-en="Brief" data-es="Brief">Brief</div>
+        <div class="pdm-detail" data-fr="Consultation · Direction artistique · Analyse · Références · Format validé" data-en="Consultation · Art Direction · Analysis · References · Format locked" data-es="Consulta · Dirección artística · Análisis · Referencias · Formato definido">Consultation · Art Direction · Analysis · References · Format locked</div>
+      </div>
+    </div>
+    <div class="pdm-step">
+      <div class="pdm-num">02</div>
+      <div class="pdm-content">
+        <div class="pdm-title" data-fr="Sound Design" data-en="Sound Design" data-es="Sound Design">Sound Design</div>
+        <div class="pdm-detail" data-fr="Montage son · SFX · Foley · Traitement des voix · Sync image · Preview" data-en="Sound editing · SFX · Foley · Voice processing · Image sync · Preview" data-es="Montaje de sonido · SFX · Foley · Procesamiento de voz · Sync imagen · Preview">Sound editing · SFX · Foley · Voice processing · Image sync · Preview</div>
+      </div>
+    </div>
+    <div class="pdm-step">
+      <div class="pdm-num">03</div>
+      <div class="pdm-content">
+        <div class="pdm-title" data-fr="Mixing" data-en="Mixing" data-es="Mixing">Mixing</div>
+        <div class="pdm-detail" data-fr="Voix · Musique · SFX · Équilibre narratif · Mastering · Specs format · Preview" data-en="Voice · Music · SFX · Narrative balance · Mastering · Format specs · Preview" data-es="Voz · Música · SFX · Equilibrio narrativo · Mastering · Specs formato · Preview">Voice · Music · SFX · Narrative balance · Mastering · Format specs · Preview</div>
+      </div>
+    </div>
+    <div class="pdm-step">
+      <div class="pdm-num">04</div>
+      <div class="pdm-content">
+        <div class="pdm-title" data-fr="Livraison" data-en="Delivery" data-es="Entrega">Delivery</div>
+        <div class="pdm-detail" data-fr="Stems export · Masters par format · Web · Broadcast · Cinéma · Validé ✓" data-en="Stems export · Masters per format · Web · Broadcast · Cinema · Approved ✓" data-es="Export stems · Masters por formato · Web · Broadcast · Cine · Aprobado ✓">Stems export · Masters per format · Web · Broadcast · Cinema · Approved ✓</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- WORKS -->
+<section class="works-section" id="works">
+  <div class="section-label" data-fr="Travaux" data-en="Works" data-es="Trabajos">Travaux</div>
+  <div class="section-title" data-fr="Ce que j'ai fait" data-en="What I've done" data-es="Lo que he hecho">Ce que j'ai fait</div>
+
+  <!-- DEMO REEL -->
+  <div class="demo-reel-wrap">
+    <div>
+      <div class="cat-label"><span data-fr="Demo Reel" data-en="Demo Reel" data-es="Demo Reel">Demo Reel</span></div>
+      <div class="demo-reel-card">
+        <div class="demo-reel-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Cs5U4noLgGo" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+          <img src="https://img.youtube.com/vi/Cs5U4noLgGo/maxresdefault.jpg" alt="SDN Showreel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(0.7)" loading="lazy">
+          <div class="play-icon-lg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+        </div>
+        <div class="demo-reel-info">
+          <h4>SDN SHOWREEL</h4>
+          
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="cat-label"><span data-fr="Dernier Travail" data-en="Latest Work" data-es="Último Trabajo">Dernier Travail</span></div>
+      <div class="demo-reel-card">
+        <div class="demo-reel-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Cyl3X88KEgg" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+          <img src="https://img.youtube.com/vi/Cyl3X88KEgg/maxresdefault.jpg" alt="Why Humanity Will Never Leave The Solar System" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(0.7)" loading="lazy">
+          <div class="play-icon-lg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+        </div>
+        <div class="demo-reel-info">
+          <h4>Why Humanity Will Never Leave The Solar System</h4>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMANDES & COLLABORATIONS 9 vidéos + 6 slots -->
+  <div class="works-cat-wrap">
+    <div class="cat-label"><span data-fr="Commandes &amp; Collaborations" data-en="Commissions &amp; Collaborations" data-es="Encargos &amp; Colaboraciones">Commandes &amp; Collaborations</span></div>
+    <div class="works-grid-3">
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Cyl3X88KEgg" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/Cyl3X88KEgg/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="Why Humanity Will Never Leave The Solar System">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>Why Humanity Will Never Leave The Solar System</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Sound Editing · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/PVy-bcTsO8A" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/PVy-bcTsO8A/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="THE AMAZING DIGITAL CIRCUS - Ep 9 : Souvenirs">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>THE AMAZING DIGITAL CIRCUS - Ep 9 : Souvenirs</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Sound Editing · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/DMNlzf8PiEM" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/DMNlzf8PiEM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="THE AMAZING DIGITAL CIRCUS - Ep 8 : hjsakldfhl">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>THE AMAZING DIGITAL CIRCUS - Ep 8 : hjsakldfhl</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Mo1A45ShcMo" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/Mo1A45ShcMo/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="You're More Stressed Than Ever - Let's Change That">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>You're More Stressed Than Ever - Let's Change That</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/_zfN9wnPvU0" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/_zfN9wnPvU0/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="AI Slop Is Destroying The Internet">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>AI Slop Is Destroying The Internet</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/gtDKKJq9u30" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/gtDKKJq9u30/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="The Dumbest Animal Alive">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>The Dumbest Animal Alive</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/u4LUix-BU0s" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/u4LUix-BU0s/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="The Drug To Master Reality">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>The Drug To Master Reality</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/LD1Rxd7RI34" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/LD1Rxd7RI34/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="CGI Animated Short Film: 'THE CURSED BOUNTY'">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>CGI Animated Short Film: "THE CURSED BOUNTY"</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/jekwdsDmEbI" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/jekwdsDmEbI/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="2023 GRADUATION FILM // EXODE // ARTFX OFFICIAL">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>2023 GRADUATION FILM // EXODE // ARTFX OFFICIAL</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/-EK7fd3Y-98" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/-EK7fd3Y-98/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="2023 GRADUATION FILM // KAIJU KID // ARTFX OFFICIAL">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>2023 GRADUATION FILM // KAIJU KID // ARTFX OFFICIAL</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/N-hO79ecWd8" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/N-hO79ecWd8/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="2023 GRADUATION FILM // LE CHANT DE ROME // ARTFX OFFICIAL">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>2023 GRADUATION FILM // LE CHANT DE ROME // ARTFX OFFICIAL</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-label" data-fr="Projet à venir" data-en="Coming soon" data-es="Próximamente">Projet à venir</span></div></div><div class="work-info"><h4></h4></div></div>
+
+    </div>
+  </div>
+
+  <!-- SÉRIES -->
+  <div class="works-cat-wrap">
+    <div class="cat-label"><span data-fr="Séries · Épisodes" data-en="Series · Episodes" data-es="Series · Episodios">Séries · Épisodes</span></div>
+    <div class="works-grid-3">
+
+      <div class="work-card">
+        <a href="https://www.youtube.com/playlist?list=PLHovnlOusNLgvAbnxluXCVB3KLj8e4QB-" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden;aspect-ratio:16/9;cursor:none">
+          <img src="https://img.youtube.com/vi/HwAPLk_sQ3w/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.75)" loading="lazy" alt="The Amazing Digital Circus">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><polygon points="20,16 34,24 20,32" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="work-info"><h4>The Amazing Digital Circus</h4><div class="work-meta"><span class="work-type" data-fr="Sound Design · Montage Son · Foley" data-en="Sound Design · Sound Editing · Foley" data-es="Sound Design · Montaje de Sonido · Foley">Sound Design · Montage Son · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <a href="https://www.youtube.com/watch?v=-JgLoItHofA" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden;aspect-ratio:16/9;cursor:none">
+          <img src="https://img.youtube.com/vi/-JgLoItHofA/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.75)" loading="lazy" alt="Monster Shaker">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><polygon points="20,16 34,24 20,32" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="work-info"><h4>Monster Shaker</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <a href="https://www.youtube.com/watch?v=krk-F7RybLM" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden;aspect-ratio:16/9;cursor:none">
+          <img src="https://img.youtube.com/vi/krk-F7RybLM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.75)" loading="lazy" alt="SamSam">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><polygon points="20,16 34,24 20,32" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="work-info"><h4>SamSam</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <a href="https://www.youtube.com/watch?v=_Lk1UNamaCc" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden;aspect-ratio:16/9;cursor:none">
+          <img src="https://img.youtube.com/vi/_Lk1UNamaCc/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.75)" loading="lazy" alt="T'choupi">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><polygon points="20,16 34,24 20,32" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="work-info"><h4>T'choupi</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <a href="https://www.youtube.com/watch?v=UhFMnS_0jWo" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden;aspect-ratio:16/9;cursor:none">
+          <img src="https://img.youtube.com/vi/UhFMnS_0jWo/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.75)" loading="lazy" alt="Il était une fois... Ces drôles d'objets">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><polygon points="20,16 34,24 20,32" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="work-info"><h4>Il était une fois... Ces drôles d'objets</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+      <div class="work-card">
+        <a href="https://www.youtube.com/watch?v=osjnYjgNg_E" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden;aspect-ratio:16/9;cursor:none">
+          <img src="https://img.youtube.com/vi/osjnYjgNg_E/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.75)" loading="lazy" alt="Oum le dauphin blanc">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><polygon points="20,16 34,24 20,32" fill="white"/></svg>
+          </div>
+        </a>
+        <div class="work-info"><h4>Oum le dauphin blanc</h4><div class="work-meta"><span class="work-type" data-fr="Montage Son · Sound Design · Foley" data-en="Sound Editing · Sound Design · Foley" data-es="Montaje de Sonido · Sound Design · Foley">Montage Son · Sound Design · Foley</span></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RE-SOUNDS 17 vidéos + slots -->
+  <div class="works-cat-wrap">
+    <div class="cat-label"><span data-fr="Re-Sounds · Projets créatifs" data-en="Re-Sounds · Creative projects" data-es="Re-Sounds · Proyectos creativos">Re-Sounds · Projets créatifs</span></div>
+    <p style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);letter-spacing:0.06em;line-height:1.8;margin-bottom:2rem;max-width:640px;border-left:2px solid var(--red);padding-left:1rem" data-fr="Exercices créatifs personnels. Je remplace intégralement la bande son d'une scène existante, de zéro : sound design, montage, mixage. Aucun son original conservé." data-en="Personal creative exercises. I replace the entire soundtrack of an existing scene from scratch: sound design, editing, mixing. No original sound kept." data-es="Ejercicios creativos personales. Reemplazo toda la banda sonora de una escena existente desde cero: sound design, montaje, mezcla. Ningún sonido original conservado.">Exercices créatifs personnels. Je remplace intégralement la bande son d'une scène existante, de zéro : sound design, montage, mixage. Aucun son original conservé.</p>
+    <div class="works-grid-3">
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/M5D6VsTLlzo" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/M5D6VsTLlzo/hqdefault.jpg" alt="[RE-SOUND] - Avatar Element Animation | HD" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy">
+        <span class="work-badge-latest" data-fr="Dernier" data-en="Latest" data-es="Último">Dernier</span>
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Avatar Element Animation | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/2xX0atMADaM" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/2xX0atMADaM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - SH88 Fight Animation | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - SH88 Fight Animation | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/A6ex8pxxx-M" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/A6ex8pxxx-M/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Fog Hill of Five Elements - Xuan vs Wrath | HD">
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Fog Hill of Five Elements - Xuan vs Wrath | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/m7QCPLWoCnU" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/m7QCPLWoCnU/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] : Azuki Elementals ✦ | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : Azuki Elementals ✦ | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/Ch8_0jbq-pM" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/Ch8_0jbq-pM/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Warhammer 40k : Space Marine II Trailer | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Warhammer 40k : Space Marine II Trailer | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/TWV4JJz8al4" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/TWV4JJz8al4/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Dear Alice - Solar Punk | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Dear Alice - Solar Punk | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/RhWfN_HdUKk" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/RhWfN_HdUKk/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] : Elden Ring Cutscene - Margit, the Fell Omen | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : Elden Ring Cutscene - Margit, the Fell Omen | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/pO4Vtjf47QY" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/pO4Vtjf47QY/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[MAKING OF] : Elden Ring Cutscene - Margit, the Fell Omen | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[MAKING OF] : Elden Ring Cutscene - Margit, the Fell Omen | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/SYRfZyFg74g" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/SYRfZyFg74g/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Combat Pratice | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Combat Pratice | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/CrwQrwWGbvE" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/CrwQrwWGbvE/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Fiddlesticks : Terror in Demacia | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Fiddlesticks : Terror in Demacia | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/jNNPCLM9TIU" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/jNNPCLM9TIU/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] : ARCANE - Vi vs. Sevika (Bar Fight) | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : ARCANE - Vi vs. Sevika (Bar Fight) | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/4xWi8JOU0H8" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/4xWi8JOU0H8/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] ARCANE - Vi & Jayce VS Chemtanks | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] ARCANE - Vi & Jayce VS Chemtanks | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://player.vimeo.com/video/833579262" style="padding:0;position:relative;cursor:none" onclick="lazyLoadVimeo(this)">
+          <img src="https://vumbnail.com/833579262.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] DEMON SLAYER - Hinokami Kagura: Sun Halo Dragon Head Dance | HD">
+          <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+        </div>
+        <div class="work-info"><h4>[RE-SOUND] DEMON SLAYER - Hinokami Kagura: Sun Halo Dragon Head Dance | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/TcXx_h9gHjQ" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/TcXx_h9gHjQ/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - ChatGPT | The Intelligence Age | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - ChatGPT | The Intelligence Age | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/JeljVEwVf_U" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/JeljVEwVf_U/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - RIOT Character Effects - UNREAL | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - RIOT Character Effects - UNREAL | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/du1QDlI5iG8" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/du1QDlI5iG8/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] : CATACLYSM TRAILER | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : CATACLYSM TRAILER | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/n-jrzXM3oEc" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/n-jrzXM3oEc/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] : The Whizzbanger - hyper | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : The Whizzbanger - hyper | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/y5MI_OH_9_k" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/y5MI_OH_9_k/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] : NIDHOGG - God Of War Ragnarök | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] : NIDHOGG - God Of War Ragnarök | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/UISazGs1WlI" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/UISazGs1WlI/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Documentary : Orcas Hunt | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Documentary : Orcas Hunt | HD</h4></div>
+      </div>
+
+      <div class="work-card">
+        <div class="work-thumb lazy-thumb" data-src="https://www.youtube.com/embed/AsWoE0Nzs3w" style="padding:0;position:relative;cursor:none" onclick="lazyLoad(this)">
+        <img src="https://img.youtube.com/vi/AsWoE0Nzs3w/hqdefault.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.7)" loading="lazy" alt="[RE-SOUND] - Documentary : Nasturtium tring to eat | HD">
+        <div class="play-icon" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+        <div class="work-info"><h4>[RE-SOUND] - Documentary : Nasturtium tring to eat | HD</h4></div>
+      </div>
+
+      <div class="work-card work-slot-empty"><div class="work-thumb"><div class="work-slot-empty-inner"><span class="slot-label" data-fr="Projet à venir" data-en="Coming soon" data-es="Próximamente">Projet à venir</span></div></div><div class="work-info"><h4></h4></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSPIRATIONS -->
+<section class="inspi-section" id="inspirations">
+  <div style="padding:5rem 4rem">
+    <div class="section-label" data-fr="Inspirations" data-en="Inspirations" data-es="Inspiraciones">Inspirations</div>
+    <h2 class="section-title" data-fr="Ce qui m'inspire" data-en="What inspires me" data-es="Lo que me inspira">Ce qui m'inspire</h2>
+        <div class="inspi-cat-block">
+      <div class="inspi-cat-header">
+        <span class="inspi-cat-label" data-fr="Séries" data-en="Series" data-es="Series">Séries</span>
+        <div class="inspi-nav">
+          <button class="inspi-prev" onclick="scrollCarousel(this,-1)" aria-label="Précédent">&#8592;</button>
+          <button class="inspi-next" onclick="scrollCarousel(this,1)" aria-label="Suivant">&#8594;</button>
+        </div>
+      </div>
+      <div class="inspi-carousel">
+        <div class="inspi-card inspi-slide">
+        <img src="img/arcane.webp" alt="Arcane" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Arcane</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/cyberpunk-edgerunners.webp" alt="Cyberpunk — Edgerunners" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Cyberpunk — Edgerunners</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/chernobyl.webp" alt="Chernobyl" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Chernobyl</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/adventure-time.webp" alt="Adventure Time" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Adventure Time</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/rick-and-morty.webp" alt="Rick and Morty" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Rick and Morty</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/le-college-noir.webp" alt="Le Collège Noir" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Le Collège Noir</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/fullmetal-alchemist.webp" alt="Fullmetal Alchemist" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Fullmetal Alchemist</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/il-etait-une-fois-la-vie.webp" alt="Il était une fois... La Vie" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Il était une fois... La Vie</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/one-punch-man.webp" alt="One Punch Man" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">One Punch Man</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/demon-slayer-infinity-castle.webp" alt="Demon Slayer: Infinity Castle" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Demon Slayer: Infinity Castle</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/frieren-beyond-the-journey-s-end.webp" alt="Frieren: Beyond the Journey's End" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Frieren: Beyond the Journey's End</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-amazing-world-of-gumball.webp" alt="The Amazing World of Gumball" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">The Amazing World of Gumball</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/gravity-falls.webp" alt="Gravity Falls" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Gravity Falls</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/dragon-hunters.webp" alt="Dragon Hunters" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Dragon Hunters</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/wakfu.webp" alt="Wakfu" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Wakfu</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/avatar-the-last-airbender.webp" alt="Avatar: The Last Airbender" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Avatar: The Last Airbender</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/samurai-jack.webp" alt="Samurai Jack" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Samurai Jack</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/secret-level.webp" alt="Secret Level" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Secret Level</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/love-death-robots.webp" alt="Love, Death + Robots" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Love, Death + Robots</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/primal.webp" alt="Primal" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Primal</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/astartes.webp" alt="Astartes">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Astartes</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/breaking-bad.webp" alt="Breaking Bad">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Breaking Bad</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/mob-psycho-100.webp" alt="Mob Psycho 100">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Mob Psycho 100</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/a-knight-of-the-seven-kingdoms.webp" alt="A Knight of the Seven Kingdoms">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">A Knight of the Seven Kingdoms</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/castlevania.webp" alt="Castlevania">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Série" data-en="Series" data-es="Serie">Série</div>
+          <div class="inspi-title">Castlevania</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+      </div>
+    </div>
+    <div class="inspi-cat-block">
+      <div class="inspi-cat-header">
+        <span class="inspi-cat-label" data-fr="Films" data-en="Films" data-es="Films">Films</span>
+        <div class="inspi-nav">
+          <button class="inspi-prev" onclick="scrollCarousel(this,-1)" aria-label="Précédent">&#8592;</button>
+          <button class="inspi-next" onclick="scrollCarousel(this,1)" aria-label="Suivant">&#8594;</button>
+        </div>
+      </div>
+      <div class="inspi-carousel">
+        <div class="inspi-card inspi-slide">
+        <img src="img/blade-runner-2049.webp" alt="Blade Runner 2049" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Blade Runner 2049</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/mad-max-fury-road.webp" alt="Mad Max: Fury Road" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Mad Max: Fury Road</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/interstellar.webp" alt="Interstellar" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Interstellar</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/akira.webp" alt="Akira" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Akira</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ghost-in-the-shell.webp" alt="Ghost in the Shell" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Ghost in the Shell</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-thing.webp" alt="The Thing" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Thing</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-lord-of-the-rings.webp" alt="The Lord of the Rings" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Lord of the Rings</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/arrival.webp" alt="Arrival" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Arrival</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/how-to-train-your-dragon.webp" alt="How to Train Your Dragon" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">How to Train Your Dragon</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/big-hero-6.webp" alt="Big Hero 6" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Big Hero 6</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/walle.webp" alt="WALL·E" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">WALL·E</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/jurassic-park.webp" alt="Jurassic Park" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Jurassic Park</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/princess-mononoke.webp" alt="Princess Mononoke" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Princess Mononoke</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ratatouille.webp" alt="Ratatouille" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Ratatouille</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-incredibles.webp" alt="The Incredibles" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Incredibles</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/kung-fu-panda.webp" alt="Kung Fu Panda" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Kung Fu Panda</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/brother-bear.webp" alt="Brother Bear" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Brother Bear</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/atlantis-the-lost-empire.webp" alt="Atlantis: The Lost Empire" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Atlantis: The Lost Empire</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/treasure-planet.webp" alt="Treasure Planet" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Treasure Planet</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-iron-giant.webp" alt="The Iron Giant" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Iron Giant</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/avatar.webp" alt="Avatar" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Avatar</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/pirates-des-caraibes.webp" alt="Pirates des Caraïbes" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Pirates des Caraïbes</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/spider-man.webp" alt="Spider-Man" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Spider-Man</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/alien.webp" alt="Alien" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Alien</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/godzilla.webp" alt="Godzilla" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Godzilla</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/pacific-rim.webp" alt="Pacific Rim" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Pacific Rim</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/predator-killer-of-killers.webp" alt="Predator: Killer of Killers" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Predator: Killer of Killers</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/9.webp" alt="9" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">9</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/puss-in-boots-the-last-wish.webp" alt="Puss in Boots: The Last Wish" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Puss in Boots: The Last Wish</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/rango.webp" alt="Rango" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Rango</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/nausicaa-of-the-valley-of-the-wind.webp" alt="Nausicaä of the Valley of the Wind" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Nausicaä of the Valley of the Wind</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/train-to-busan.webp" alt="Train to Busan" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Train to Busan</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/rec.webp" alt="[REC]" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">[REC]</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/dune.webp" alt="Dune" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Dune</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/dunkirk.webp" alt="Dunkirk" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Dunkirk</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/saving-private-ryan.webp" alt="Saving Private Ryan" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Saving Private Ryan</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/star-wars.webp" alt="Star Wars" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Star Wars</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/everything-everywhere-all-at-once.webp" alt="Everything Everywhere All at Once">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Everything Everywhere All at Once</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/paprika.webp" alt="Paprika">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Paprika</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/memories-of-murder.webp" alt="Memories of Murder">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Memories of Murder</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/there-will-be-blood.webp" alt="There Will Be Blood">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">There Will Be Blood</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/no-country-for-old-men.webp" alt="No Country for Old Men">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">No Country for Old Men</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-lighthouse.webp" alt="The Lighthouse">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Lighthouse</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-revenant.webp" alt="The Revenant">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Revenant</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/rashomon.webp" alt="Rashomon">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Rashomon</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/se7en.webp" alt="Se7en">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Se7en</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ernest-et-celestine.webp" alt="Ernest et Célestine" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Ernest et Célestine</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/a-quiet-place.webp" alt="A Quiet Place" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">A Quiet Place</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/gravity.webp" alt="Gravity" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">Gravity</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-northman.webp" alt="The Northman" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Film" data-en="Film" data-es="Película">Film</div>
+          <div class="inspi-title">The Northman</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+      </div>
+    </div>
+    <div class="inspi-cat-block">
+      <div class="inspi-cat-header">
+        <span class="inspi-cat-label" data-fr="Jeux vidéo" data-en="Video games" data-es="Videojuegos">Jeux vidéo</span>
+        <div class="inspi-nav">
+          <button class="inspi-prev" onclick="scrollCarousel(this,-1)" aria-label="Précédent">&#8592;</button>
+          <button class="inspi-next" onclick="scrollCarousel(this,1)" aria-label="Suivant">&#8594;</button>
+        </div>
+      </div>
+      <div class="inspi-carousel">
+        <div class="inspi-card inspi-slide">
+        <img src="img/battlefield-1.webp" alt="Battlefield 1" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Battlefield 1</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-witcher-3-wild-hunt.webp" alt="The Witcher 3: Wild Hunt" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">The Witcher 3: Wild Hunt</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/elden-ring.webp" alt="Elden Ring" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Elden Ring</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/god-of-war.webp" alt="God of War" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">God of War</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/cyberpunk-2077.webp" alt="Cyberpunk 2077" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Cyberpunk 2077</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/hollow-knight.webp" alt="Hollow Knight" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Hollow Knight</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/okami-hd.webp" alt="Okami HD" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Okami HD</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/sekiro-shadows-die-twice.webp" alt="Sekiro: Shadows Die Twice" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Sekiro: Shadows Die Twice</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/darkest-dungeon.webp" alt="Darkest Dungeon" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Darkest Dungeon</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/rayman-legends.webp" alt="Rayman Legends" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Rayman Legends</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/cuphead.webp" alt="Cuphead" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Cuphead</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/monster-hunter-world.webp" alt="Monster Hunter: World" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Monster Hunter: World</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/hades.webp" alt="Hades" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Hades</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/dark-cloud-2.webp" alt="Dark Cloud 2" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Dark Cloud 2</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-elder-scrolls-v-skyrim.webp" alt="The Elder Scrolls V: Skyrim" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">The Elder Scrolls V: Skyrim</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/outer-wilds.webp" alt="Outer Wilds" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Outer Wilds</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ori-and-the-blind-forest.webp" alt="Ori and the Blind Forest" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Ori and the Blind Forest</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/the-legend-of-zelda-breath-of-the-wild.webp" alt="The Legend of Zelda: Breath of the Wild" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">The Legend of Zelda: Breath of the Wild</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/doom-2016.webp" alt="DOOM (2016)" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">DOOM (2016)</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ghost-of-tsushima.webp" alt="Ghost of Tsushima" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Ghost of Tsushima</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/metal-gear-rising-revengeance.webp" alt="Metal Gear Rising: Revengeance" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Metal Gear Rising: Revengeance</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/dead-space.webp" alt="Dead Space" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Dead Space</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ready-or-not.webp" alt="Ready or Not" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Ready or Not</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/journey.webp" alt="Journey" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Journey</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/gris.webp" alt="GRIS" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">GRIS</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/silent-hill-2.webp" alt="Silent Hill 2" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Silent Hill 2</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/outlast.webp" alt="Outlast" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Outlast</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/detroit-become-human.webp" alt="Detroit: Become Human" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Detroit: Become Human</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/warhammer-40-000-dawn-of-war.webp" alt="Warhammer 40,000: Dawn of War" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Warhammer 40,000: Dawn of War</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/kunitsu-gami-path-of-the-goddess.webp" alt="Kunitsu-Gami: Path of the Goddess">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Kunitsu-Gami: Path of the Goddess</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/helldivers-2.webp" alt="Helldivers 2">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Helldivers 2</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/sea-of-thieves.webp" alt="Sea of Thieves">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Sea of Thieves</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/baldur-s-gate-3.webp" alt="Baldur's Gate 3">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Baldur's Gate 3</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/frostpunk.webp" alt="Frostpunk">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Frostpunk</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/ixion.webp" alt="Ixion">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Ixion</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/warhammer-40-000-mechanicus.webp" alt="Warhammer 40,000: Mechanicus">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Warhammer 40,000: Mechanicus</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/hellblade-senua-s-sacrifice.webp" alt="Hellblade: Senua's Sacrifice" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Hellblade: Senua's Sacrifice</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+        <div class="inspi-card inspi-slide">
+        <img src="img/metro-exodus.webp" alt="Metro Exodus" loading="lazy">
+        <div class="inspi-overlay">
+          <div class="inspi-cat" data-fr="Jeu vidéo" data-en="Video game" data-es="Videojuego">Jeu vidéo</div>
+          <div class="inspi-title">Metro Exodus</div>
+        </div>
+        <div class="inspi-line"></div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--off-black);border-top:0.5px solid var(--border)">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-label">Contact</div>
+      <h2 data-fr="Un projet ?<br><em>Parlons-en.</em>" data-en="A project?<br><em>Let's talk.</em>" data-es="¿Un proyecto?<br><em>Hablemos.</em>">Un projet ?<br><em>Parlons-en.</em></h2>
+      <p data-fr="Basé en France, disponible en remote. Que ce soit pour un long métrage, un court-métrage, une série ou un projet individuel, n'hésitez pas." data-en="Based in France, available remotely. Whether it's a feature film, a short film, a series or an individual project, don't hesitate to reach out." data-es="Basado en Francia, disponible en remoto. Ya sea un largometraje, un cortometraje, una serie o un proyecto individual, no dudes en contactarme.">Basé en France, disponible en remote. Que ce soit pour un long métrage, un court-métrage, une série ou un projet individuel, n'hésitez pas.</p>
+      <div class="contact-links">
+        <a href="mailto:sdnathanpro@gmail.com" class="contact-link"><span class="contact-link-dot"></span>sdnathanpro@gmail.com</a>
+        <a href="https://linktr.ee/SDN_M" class="contact-link"><span class="contact-link-dot"></span>linktr.ee/SDN_M</a>
+        <a href="https://www.youtube.com/@SDN_M" class="contact-link"><span class="contact-link-dot"></span>YouTube · SDN_M</a>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" action="https://formspree.io/f/mgorplea" method="POST" id="contact-form">
+        <div class="form-field"><label data-fr="Nom" data-en="Name" data-es="Nombre">Nom</label><input type="text" name="name" id="f-name" placeholder="Votre nom" required></div>
+        <div class="form-field"><label>Email</label><input type="email" name="email" id="f-email" placeholder="votre@email.com" required></div>
+        <div class="form-field">
+          <label data-fr="Type de projet" data-en="Project type" data-es="Tipo de proyecto">Type de projet</label>
+          <select name="project_type" id="f-type">
+            <option value="" data-fr="Sélectionner" data-en="Select" data-es="Seleccionar">Sélectionner</option>
+            <option data-fr="Long métrage" data-en="Feature film" data-es="Largometraje">Long métrage</option>
+            <option data-fr="Court-métrage" data-en="Short film" data-es="Cortometraje">Court-métrage</option>
+            <option data-fr="Série / Animation" data-en="Series / Animation" data-es="Serie / Animación">Série / Animation</option>
+            <option data-fr="Publicité / Branding" data-en="Advertising / Branding" data-es="Publicidad / Branding">Publicité / Branding</option>
+            <option data-fr="Motion Design" data-en="Motion Design" data-es="Motion Design">Motion Design</option>
+            <option data-fr="Projet individuel" data-en="Individual project" data-es="Proyecto individual">Projet individuel</option>
+            <option data-fr="Autre" data-en="Other" data-es="Otro">Autre</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Message</label><textarea name="message" id="f-msg" placeholder="Décrivez votre projet..." required></textarea></div>
+        <input type="hidden" name="_subject" value="Nouveau message SDN Portfolio">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
+        <button type="submit" class="form-submit" data-fr="Envoyer le message" data-en="Send message" data-es="Enviar mensaje">Envoyer le message</button>
+        <p id="form-success" style="display:none;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--red);letter-spacing:0.1em;margin-top:1rem" data-fr="Message envoyé. Je vous répondrai rapidement." data-en="Message sent. I'll get back to you shortly." data-es="Mensaje enviado. Te responderé en breve.">Message envoyé. Je vous répondrai rapidement.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SDN</div>
+  <div class="footer-copy">2026 © SDN · <span data-fr="Tous droits réservés" data-en="All rights reserved" data-es="Todos los derechos reservados">Tous droits réservés</span></div>
+</footer>
+
+
+<!-- Carrousels auto-scroll — script indépendant pour ne jamais dépendre du reste -->
+
+<div class="legal-bar">
+  <span data-fr="Nathan Ménage — entrepreneur individuel exerçant sous le nom commercial SDN · SIRET 953 245 503 00016 · Paris, France" data-en="Nathan Ménage — sole trader operating under the trading name SDN · SIRET 953 245 503 00016 · Paris, France">Nathan Ménage — sole trader operating under the trading name SDN · SIRET 953 245 503 00016 · Paris, France</span><br>
+  <a href="/mentions-legales.html" style="color:var(--red);text-decoration:none" data-fr="Mentions légales et politique de confidentialité" data-en="Legal notice and privacy policy">Legal notice and privacy policy</a> · <a href="mailto:sdnathanpro@gmail.com" style="color:var(--red);text-decoration:none">sdnathanpro@gmail.com</a>
+</div>
+<script src="script.js" defer></script>
+</body>
+</html>
